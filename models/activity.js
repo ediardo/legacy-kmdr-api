@@ -1,16 +1,15 @@
-'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Activity = sequelize.define('Activity', {
+  var Activity = sequelize.define("Activity", {
     userId: DataTypes.INTEGER,
-    targetId: DataTypes.INTEGER,
-    targetType: DataTypes.STRING,
-    isPublic: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    entityId: DataTypes.INTEGER,
+    entityType: DataTypes.STRING,
+    isPrivate: DataTypes.BOOLEAN,
+    createdAt: DataTypes.DATE
   });
 
   Activity.associate = models => {
-    Activity.belongsTo(models.User, { foreignKey: 'userId' });
+    Activity.belongsTo(models.EntityType, { foreignKey: "entityTypeId" });
+    Activity.belongsTo(models.User, { foreignKey: "userId" });
   };
   return Activity;
 };

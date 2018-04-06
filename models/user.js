@@ -1,77 +1,92 @@
-import bcrypt from 'bcrypt';
-import { reservedUsernames } from '../config/reservedUsernames';
+import bcrypt from "bcrypt";
+import { reservedUsernames } from "../config/reservedUsernames";
 
-const hashPassword = (password) => bcrypt.hashSync(password, 1);
+const hashPassword = password => bcrypt.hashSync(password, 1);
 
-/* TO BE DEPRECATED
-const comparePassword = (password, hash) => bcrypt.compare(password, hash);
-const usernameIsReserved = (username) => reservedUsernames.includes(username);
-const usernameIsValid = (username) => username.match(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){3,38}$/i);
-*/
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
-      name: DataTypes.STRING,
-      username: {
-        type: DataTypes.STRING,
-        validate: {
-          min: 3,
-          isLowercase: true,
-          notIn: [reservedUsernames],
-        }
-      },
-      email: {
-        type: DataTypes.STRING,
-        validate: {
-          isEmail: true,
-        }
-      },
-      password: {
-        type: DataTypes.STRING,
-        validate: {
-          min: 6
-        }
-      },
-      isPasswordSet: DataTypes.BOOLEAN,
-      isUsernameSet: DataTypes.BOOLEAN,
-      website: DataTypes.STRING,
-      isLoginEnabled: DataTypes.BOOLEAN,
-      githubId: DataTypes.STRING,
-      googleId: DataTypes.STRING,
-      facebookId: DataTypes.STRING,
-      slackId: DataTypes.STRING,
-      lastSignedIn: DataTypes.DATE,
-      lastSignedInIp: DataTypes.STRING,
-      forgotPasswordToken: DataTypes.STRING,
-      forgotPasswordExpires: DataTypes.DATE,
-      externalAvatarUrl: DataTypes.STRING,
-      hasSeenWelcome: DataTypes.INTEGER,
-      status: DataTypes.INTEGER,
-      createdAt: {
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-      } 
+  var User = sequelize.define("User", {
+    username: {
+      type: DataTypes.STRING,
+      validate: {
+        min: 3,
+        isLowercase: true,
+        notIn: [reservedUsernames]
+      }
+    },
+    name: {
+      type: DataTypes.STRING(45),
+      validate: {
+        min: 3
+      }
+    },
+    email: {
+      type: DataTypes.STRING(70),
+      validate: {
+        isEmail: true
+      }
+    },
+    password: {
+      type: DataTypes.STRING(100),
+      validate: {
+        min: 6,
+        max: 32
+      }
+    },
+    websiteUrl: {
+      type: DataTypes.STRING(100),
+      validate: {
+        isUrl: true
+      }
+    },
+    twitterHandle: {
+      type: DataTypes.STRING(40)
+    },
+    status: DataTypes.INTEGER,
+    lastLogin: DataTypes.DATE,
+    lastLoginIpAddress: DataTypes.STRING(15),
+    githubId: DataTypes.STRING,
+    avatarUrl: {
+      type: DataTypes.STRING(500),
+      validate: {
+        isUrl: true
+      }
+    },
+    hasSeenWelcome: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
-  );
+  });
 
-  User.hook('beforeBulkUpdate', (user) => {
-    const { username, password } = user.attributes;
+  User.hook("beforeBulkUpdate", user => {
+    const { username, name, password } = user.attributes;
     if (username) {
-      user.attributes.username = username.trim().toLowerCase()
+      user.attributes.username = username.trim().toLowerCase();
+    }
+    if (name) {
+      user.attributes.name = name.trim();
     }
     if (password) {
-      user.attributes.password  = hashPassword(password);
+      user.attributes.password = hashPassword(password);
     }
     return user;
   });
-  
+
   User.associate = models => {
-    User.hasMany(models.Kommandr, { foreignKey: 'userId' });
-    User.hasMany(models.Comment, {  foreignKey: 'userId' });
-    User.hasMany(models.Collection, { foreignKey: 'userId' });
-    User.hasMany(models.Star, { foreignKey: 'userId' });
-    User.hasMany(models.Token, { foreignKey: 'userId' });
+    User.hasMany(models.Activity, { foreignKey: "userId" });
+    User.hasMany(models.EmailToken, { foreignKey: "userId" });
+    User.hasMany(models.AbuseReport, { foreignKey: "userId" });
+    User.hasMany(models.ProgramView, { foreignKey: "userId" });
+    User.hasMany(models.Star, { foreignKey: "userId" });
+    User.hasMany(models.Comment, { foreignKey: "userId" });
+    User.hasMany(models.Guide, { foreignKey: "userId" });
+    User.hasMany(models.Command, { foreignKey: "userId" });
   };
 
   return User;

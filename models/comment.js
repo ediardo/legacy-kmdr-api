@@ -1,14 +1,41 @@
 module.exports = function(sequelize, DataTypes) {
   var Comment = sequelize.define("Comment", {
     userId: DataTypes.INTEGER,
-    comment: DataTypes.STRING,
+    replyTo: DataTypes.INTEGER,
+    comment: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    posStart: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: null,
+      validate: {
+        min: 0
+      }
+    },
+    posEnd: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: null,
+      validate: {
+        min: 1
+      }
+    },
+    isPartial: {
+      type: DataTypes.BOOLEAN,
+      defaultFalue: false
+    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   });
 
   Comment.associate = models => {
     Comment.belongsTo(models.User, { foreignKey: "userId" });
-    Comment.belongsTo(models.Kommandr, { foreignKey: "kommandrId" });
+    Comment.hasOne(models.GuideComment, { foreignKey: "commentId" });
   };
 
   Comment.afterCreate((comment, options) => {

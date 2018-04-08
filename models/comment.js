@@ -29,8 +29,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultFalue: false
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
+    }
   });
 
   Comment.associate = models => {

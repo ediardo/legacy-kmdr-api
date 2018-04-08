@@ -1,40 +1,28 @@
-'use strict';
+"use strict";
 module.exports = {
-  up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Stars', {
+  up: function(sequelize, DataTypes) {
+    return sequelize.createTable("Stars", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: DataTypes.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Users',
-          key: 'id'
-        }
-      },
-      kommandrId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Kommandrs',
-          key: 'id'
+          model: "Users",
+          key: "id"
         }
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       }
     });
   },
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Stars');
+  down: function(sequelize, DataTypes) {
+    return sequelize.dropTable("Stars");
   }
 };

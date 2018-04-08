@@ -1,10 +1,21 @@
 module.exports = function(sequelize, DataTypes) {
   var Activity = sequelize.define("Activity", {
-    userId: DataTypes.INTEGER,
-    entityId: DataTypes.INTEGER,
-    entityType: DataTypes.STRING,
-    isPrivate: DataTypes.BOOLEAN,
-    createdAt: DataTypes.DATE
+    userId: {
+      type: DataTypes.INTEGER
+    },
+    entityId: {
+      type: DataTypes.INTEGER
+    },
+    entityType: {
+      type: DataTypes.STRING
+    },
+    isPrivate: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    }
   });
 
   Activity.associate = models => {

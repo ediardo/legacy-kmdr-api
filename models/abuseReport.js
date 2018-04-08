@@ -1,12 +1,29 @@
 module.exports = (sequelize, DataTypes) => {
   var AbuseReport = sequelize.define("AbuseReport", {
-    userId: DataTypes.INTEGER,
-    reason: DataTypes.STRING,
-    status: DataTypes.INTEGER,
-    entityType: DataTypes.INTEGER,
-    entityId: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    userId: {
+      type: DataTypes.INTEGER
+    },
+    reason: {
+      type: DataTypes.STRING(10),
+      validate: {
+        notEmpty: true
+      }
+    },
+    status: {
+      type: DataTypes.INTEGER
+    },
+    entityTypeId: {
+      type: DataTypes.INTEGER
+    },
+    entityId: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
+    }
   });
 
   AbuseReport.associate = models => {

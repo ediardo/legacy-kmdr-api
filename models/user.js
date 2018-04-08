@@ -6,7 +6,7 @@ const hashPassword = password => bcrypt.hashSync(password, 1);
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     username: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(22),
       validate: {
         min: 3,
         isLowercase: true,
@@ -41,10 +41,21 @@ module.exports = function(sequelize, DataTypes) {
     twitterHandle: {
       type: DataTypes.STRING(40)
     },
-    status: DataTypes.INTEGER,
-    lastLogin: DataTypes.DATE,
-    lastLoginIpAddress: DataTypes.STRING(15),
-    githubId: DataTypes.STRING,
+    status: {
+      type: DataTypes.INTEGER
+    },
+    lastLogin: {
+      type: DataTypes.DATE
+    },
+    lastLoginIpAddress: {
+      type: DataTypes.STRING(15)
+    },
+    githubId: {
+      type: DataTypes.INTEGER
+    },
+    githubHandle: {
+      type: DataTypes.STRING(50)
+    },
     avatarUrl: {
       type: DataTypes.STRING(500),
       validate: {
@@ -83,8 +94,7 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.EmailToken, { foreignKey: "userId" });
     User.hasMany(models.AbuseReport, { foreignKey: "userId" });
     User.hasMany(models.ProgramView, { foreignKey: "userId" });
-    User.hasMany(models.CommandStars, { foreignKey: "userId" });
-    User.hasMany(models.GuideStars, { foreignKey: "userId" });
+    User.hasMany(models.Star, { foreignKey: "userId" });
     User.hasMany(models.Comment, { foreignKey: "userId" });
     User.hasMany(models.Guide, { foreignKey: "userId" });
     User.hasMany(models.Command, { foreignKey: "userId" });

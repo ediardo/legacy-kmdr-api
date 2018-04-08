@@ -2,26 +2,75 @@ var Hashids = require("hashids");
 
 module.exports = function(sequelize, DataTypes) {
   var Command = sequelize.define("Command", {
-    hashId: DataTypes.STRING,
-    title: DataTypes.STRING,
-    cli: DataTypes.STRING,
-    description: DataTypes.STRING,
+    programId: {
+      type: DataTypes.INTEGER
+    },
+    userId: {
+      type: DataTypes.INTEGER
+    },
+    sourceId: {
+      type: DataTypes.INTEGER
+    },
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+        min: 1
+      }
+    },
+    rawContent: {
+      type: DataTypes.STRING(500),
+      validate: {
+        notEmpty: true,
+        min: 2
+      }
+    },
+    description: {
+      type: DataTypes.STRING(500)
+    },
+    hashUrl: {
+      type: DataTypes.STRING(9)
+    },
     forkFrom: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    source: DataTypes.STRING,
-    totalViews: DataTypes.INTEGER,
-    totalStars: DataTypes.INTEGER,
-    totalComments: DataTypes.INTEGER,
-    totalForks: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    vanityUrl: {
+      type: DataTypes.STRING(65)
+    },
+    totalViews: {
+      type: DataTypes.INTEGER
+    },
+    totalStars: {
+      type: DataTypes.INTEGER
+    },
+    totalComments: {
+      type: DataTypes.INTEGER
+    },
+    totalForks: {
+      type: DataTypes.INTEGER
+    },
+    status: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
+    }
   });
 
   Command.associate = models => {
-    Command.belongsTo(models.User, { foreignKey: "userId" });
-    Command.belongsTo(models.Program, { foreignKey: "userId" });
+    Command.belongsTo(models.User, {
+      foreignKey: "userId"
+    });
+    Command.belongsTo(models.Program, {
+      foreignKey: "programId"
+    });
+    Command.hasMany(models.Var, {
+      foreignKey: "commandId"
+    });
     Command.hasMany(models.Comment, {
       foreignKey: "kommandrId",
       onDelete: "CASCADE"
@@ -29,23 +78,23 @@ module.exports = function(sequelize, DataTypes) {
     Command.hasMany(models.Star, { foreignKey: "kommandrId" });
     Command.hasMany(models.Command, {
       foreignKey: "forkFrom",
-      as: "Forks",
+      as: "Fork",
       onDelete: "SET NULL"
     });
-    Kommandr.belongsToMany(models.Collection, {
-      foreignKey: "kommandrId",
-      through: "KommandrCollection"
+    Command.belongsToMany(models.Guide, {
+      foreignKey: "commandId",
+      through: "GuideCommand"
     });
   };
 
-  Kommandr.beforeCreate((kommandr, options) => {
-    return Kommandr.max("id").then(max => {
+  Command.beforeCreate((kommandr, options) => {
+    return Command.max("id").then(max => {
       var hashId = new Hashids("kommandr", 6);
       return (kommandr.hashId = hashId.encode(max + 1));
     });
   });
 
-  Kommandr.afterCreate((kommandr, options) => {
+  Command.afterCreate((kommandr, options) => {
     const { id, userId } = kommandr;
     // Anon user is always 0, do not log activity
     if (userId !== 0) {
@@ -64,12 +113,12 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Kommandr.beforeBulkDestroy(options => {
+  Command.beforeBulkDestroy(options => {
     options.individualHooks = true;
     return options;
   });
 
-  Kommandr.afterDestroy((kommandr, options) => {
+  Command.afterDestroy((kommandr, options) => {
     const { id, userId, forkFrom } = kommandr;
     // Anon user is always 0, do not log activity
     if (userId !== 0) {
@@ -88,5 +137,5 @@ module.exports = function(sequelize, DataTypes) {
       );
     }
   });
-  return Kommandr;
+  return Command;
 };

@@ -1,21 +1,30 @@
 module.exports = function(sequelize, DataTypes) {
-  var Star = sequelize.define("Star", {
+  var Var = sequelize.define("Var", {
     userId: {
       type: DataTypes.INTEGER
     },
+    name: {
+      type: DataTypes.STRING(65)
+    },
+    defaultValue: {
+      type: DataTypes.STRING(250)
+    },
     createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
       type: DataTypes.DATE
     }
   });
 
-  Star.associate = models => {
-    Star.belongsTo(models.User, {
+  Var.associate = models => {
+    Var.belongsTo(models.User, {
       foreignKey: "userId"
     });
-    Star.hasOne(models.CommandStar, {
+    Var.hasMany(models.CommandVar, {
       foreignKey: "starId"
     });
-    Star.hasOne(models.GuideStar, {
+    Var.hasMany(models.GuideVar, {
       foreignKey: "starId"
     });
   };
@@ -29,5 +38,5 @@ module.exports = function(sequelize, DataTypes) {
     );
   });
   */
-  return Star;
+  return Var;
 };

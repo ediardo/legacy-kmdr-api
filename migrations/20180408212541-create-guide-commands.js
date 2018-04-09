@@ -1,44 +1,44 @@
-"use strict";
 module.exports = {
-  up: (sequelize, DataTypes) => {
-    return sequelize.createTable("Activities", {
+  up: function(sequelize, DataTypes) {
+    return sequelize.createTable("GuideCommands", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      userId: {
+      commandId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "Users",
+          model: "Commands",
           key: "id"
         }
       },
-      entityId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      entityTypeId: {
+      guideId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "EntityTypes",
+          model: "Guides",
           key: "id"
         }
       },
-      isPrivate: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
+      step: {
+        type: DataTypes.INTEGER
+      },
+      stepDescription: {
+        type: DataTypes.STRING(250)
       },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false
+      },
+      updatedAt: {
+        type: DataTypes.DATE
       }
     });
   },
-  down: (sequelize, DataTypes) => {
-    return sequelize.dropTable("Activities");
+  down: function(sequelize, DataTypes) {
+    return sequelize.dropTable("GuideCommands");
   }
 };

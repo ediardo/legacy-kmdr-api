@@ -1,39 +1,73 @@
-"use strict";
 module.exports = function(sequelize, DataTypes) {
   var Guide = sequelize.define("Guide", {
     name: {
       type: DataTypes.STRING(65),
+      allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: true,
+        len: [2, 65]
       }
     },
     description: {
-      type: DataTypes.STRING(500),
-      validate: {
-        notEmpty: true
-      }
+      type: DataTypes.STRING(500)
     },
-    userId: DataTypes.INTEGER,
-    vanityUrl: DataTypes.STRING(65),
-    hashUrl: DataTypes.STRING(9),
-    listed: DataTypes.BOOLEAN,
-    status: DataTypes.INTEGER,
-    totalStars: DataTypes.INTEGER,
-    totalViews: DataTypes.INTEGER,
-    totalComments: DataTypes.INTEGER,
-    totalCommands: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE,
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    vanityUrl: {
+      type: DataTypes.STRING(65)
+    },
+    hashUrl: {
+      type: DataTypes.STRING(9)
+    },
+    listed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    status: {
+      type: DataTypes.INTEGER
+    },
+    totalStars: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalViews: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalComments: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalCommands: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     updatedAt: DataTypes.DATE
   });
 
   Guide.associate = models => {
-    Guide.belongsToMany(models.Kommandr, {
-      foreignKey: "collectionId",
-      through: "KommandrCollection"
+    Guide.belongsToMany(models.Command, {
+      foreignKey: "guideId",
+      through: "GuideCommand"
     });
-    Guide.belongsTo(models.User, { foreignKey: "userId" });
+    Guide.belongsTo(models.User, {
+      foreignKey: "userId"
+    });
+    Guide.belongsToMany(models.Star, {
+      through: {
+        model: "GuideStar"
+      },
+      foreignKey: "guideId"
+    });
   };
 
+  /*
   Guide.afterCreate((collection, options) => {
     const { id, userId } = collection;
     // Anon user is always 0, do not log activity
@@ -45,6 +79,6 @@ module.exports = function(sequelize, DataTypes) {
       });
     }
   });
-
+  */
   return Guide;
 };

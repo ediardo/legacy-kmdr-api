@@ -1,12 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
   var Source = sequelize.define("Source", {
-    name: DataTypes.STRING(45),
-    description: DataTypes.STING(150),
-    createdAt: DataTypes.DATE
+    name: {
+      type: DataTypes.STRING(45)
+    },
+    description: {
+      type: DataTypes.STING(150)
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    }
   });
 
   Source.associate = models => {
-    Source.hasMany(models.Program, { foreignKey: "sourceId" });
+    Source.hasMany(models.Program, {
+      foreignKey: "sourceId"
+    });
   };
   return Source;
 };

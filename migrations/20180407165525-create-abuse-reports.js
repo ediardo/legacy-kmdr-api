@@ -17,25 +17,27 @@ module.exports = {
       },
       reason: {
         type: DataTypes.STRING(10),
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       status: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       entityTypeId: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
           model: "EntityTypes",
           key: "id"
         }
       },
       entityId: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
       },
       createdAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        allowNull: false
       },
       updatedAt: {
         type: DataTypes.DATE

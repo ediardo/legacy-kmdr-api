@@ -1,32 +1,64 @@
 module.exports = (sequelize, DataTypes) => {
   var Program = sequelize.define("Program", {
-    sourceId: DataTypes.INTEGER,
-    cliName: DataTypes.STRING(64),
-    name: DataTypes.STRING(64),
-    rawManPage: DataTypes.STRING,
+    sourceId: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    cliName: {
+      type: DataTypes.STRING(64)
+    },
+    name: {
+      type: DataTypes.STRING(64),
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    rawManPage: {
+      type: DataTypes.STRING
+    },
     linkUrl: {
       type: DataTypes.STRING(250),
       validate: {
         isUrl: true
       }
     },
-    shortDescription: DataTypes.STRING(300),
-    totalViews: DataTypes.INTEGER,
-    status: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    shortDescription: {
+      type: DataTypes.STRING(300)
+    },
+    totalViews: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    totalCommands: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    status: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE
+    }
   });
 
   Program.associate = models => {
-    Program.belongsTo(models.Source, { foreignKey: "sourceId" });
-    Program.belongsToMany(models.Platform, {
-      through: {
-        model: models.ProgramPlatform
-      },
+    Program.belongsTo(models.Source, {
+      foreignKey: "sourceId"
+    });
+    Program.belongsTo(models.Platform, {
       foreignKey: "programId"
     });
-    Program.hasMany(models.Command, { foreignKey: "programId" });
-    Program.hasMany(models.ProgramView, { foreignKey: "programId" });
+    Program.hasMany(models.Command, {
+      foreignKey: "programId"
+    });
+    Program.hasMany(models.ProgramView, {
+      foreignKey: "programId"
+    });
   };
 
   return Program;

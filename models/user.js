@@ -90,14 +90,33 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = models => {
-    User.hasMany(models.Activity, { foreignKey: "userId" });
-    User.hasMany(models.EmailToken, { foreignKey: "userId" });
-    User.hasMany(models.AbuseReport, { foreignKey: "userId" });
-    User.hasMany(models.ProgramView, { foreignKey: "userId" });
-    User.hasMany(models.Star, { foreignKey: "userId" });
-    User.hasMany(models.Comment, { foreignKey: "userId" });
-    User.hasMany(models.Guide, { foreignKey: "userId" });
-    User.hasMany(models.Command, { foreignKey: "userId" });
+    User.hasMany(models.Activity, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.EmailToken, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.AbuseReport, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.ProgramView, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.Star, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.Comment, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.Guide, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.Command, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.Var, {
+      foreignKey: "userId"
+    });
   };
 
   return User;

@@ -54,7 +54,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER
     },
     createdAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
     },
     updatedAt: {
       type: DataTypes.DATE
@@ -68,14 +69,24 @@ module.exports = function(sequelize, DataTypes) {
     Command.belongsTo(models.Program, {
       foreignKey: "programId"
     });
-    Command.hasMany(models.Var, {
-      foreignKey: "commandId"
+    Command.belongSToMany(models.Var, {
+      foreignKey: "commandId",
+      through: {
+        model: "CommandVar"
+      }
     });
-    Command.hasMany(models.Comment, {
+    Command.belongsToMany(models.Comment, {
       foreignKey: "kommandrId",
-      onDelete: "CASCADE"
+      through: {
+        model: "CommandComment"
+      }
     });
-    Command.hasMany(models.Star, { foreignKey: "kommandrId" });
+    Command.belongsToMany(models.Star, {
+      foreignKey: "kommandrId",
+      through: {
+        model: "CommandStar"
+      }
+    });
     Command.hasMany(models.Command, {
       foreignKey: "forkFrom",
       as: "Fork",
@@ -83,10 +94,12 @@ module.exports = function(sequelize, DataTypes) {
     });
     Command.belongsToMany(models.Guide, {
       foreignKey: "commandId",
-      through: "GuideCommand"
+      through: {
+        model: "GuideCommand"
+      }
     });
   };
-
+  /*
   Command.beforeCreate((kommandr, options) => {
     return Command.max("id").then(max => {
       var hashId = new Hashids("kommandr", 6);
@@ -137,5 +150,6 @@ module.exports = function(sequelize, DataTypes) {
       );
     }
   });
+  */
   return Command;
 };

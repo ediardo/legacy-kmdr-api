@@ -1,16 +1,35 @@
 module.exports = function(sequelize, DataTypes) {
-  var GuideComment = sequelize.define("GuideComment", {
+  var GuideCommand = sequelize.define("GuideCommand", {
+    commandId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     guideId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    step: {
       type: DataTypes.INTEGER
     },
-    commmentId: {
-      type: DataTypes.INTEGER
+    stepDescription: {
+      type: DataTypes.STRING(250)
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
   });
 
-  GuideComment.associate = models => {
-    GuideComment.belongsTo(models.Comment, { foreignKey: "starId" });
-    GuideComment.belongsTo(models.Guide, { foreignKey: "guideId" });
+  GuideCommand.associate = models => {
+    GuideCommand.belongsTo(models.Command, {
+      foreignKey: "commandId"
+    });
+    GuideCommand.belongsTo(models.Guide, {
+      foreignKey: "guideId"
+    });
   };
 
   /*
@@ -32,5 +51,5 @@ module.exports = function(sequelize, DataTypes) {
     );
   });
   */
-  return GuideComment;
+  return GuideCommand;
 };

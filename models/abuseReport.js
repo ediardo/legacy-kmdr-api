@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     reason: {
       type: DataTypes.STRING(10),
+      allowNull: false,
       validate: {
         notEmpty: true
       }

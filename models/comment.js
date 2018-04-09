@@ -1,9 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
   var Comment = sequelize.define("Comment", {
-    userId: DataTypes.INTEGER,
-    replyTo: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER
+    },
+    replyTo: {
+      type: DataTypes.INTEGER
+    },
     comment: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.STRING(1000),
       allowNull: false,
       validate: {
         notEmpty: true
@@ -30,7 +34,8 @@ module.exports = function(sequelize, DataTypes) {
       defaultFalue: false
     },
     createdAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
     },
     updatedAt: {
       type: DataTypes.DATE
@@ -38,10 +43,18 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Comment.associate = models => {
-    Comment.belongsTo(models.User, { foreignKey: "userId" });
-    Comment.hasOne(models.GuideComment, { foreignKey: "commentId" });
+    Comment.belongsTo(models.User, {
+      foreignKey: "userId"
+    });
+    Comment.hasOne(models.GuideComment, {
+      foreignKey: "commentId"
+    });
+    Comment.HasOne(models.CommandComment, {
+      foreignKey: "commentId"
+    });
   };
 
+  /*
   Comment.afterCreate((comment, options) => {
     const { id, userId, kommandrId } = comment;
     // Anon user is always 0, do not log activity
@@ -80,6 +93,6 @@ module.exports = function(sequelize, DataTypes) {
       { where: { id: kommandrId }, silent: true }
     );
   });
-
+  */
   return Comment;
 };

@@ -1,44 +1,46 @@
-"use strict";
 module.exports = {
-  up: (sequelize, DataTypes) => {
-    return sequelize.createTable("Activities", {
+  up: function(sequelize, DataTypes) {
+    return sequelize.createTable("CommandVars", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      userId: {
+      varId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "Users",
+          model: "Vars",
           key: "id"
         }
       },
-      entityId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      entityTypeId: {
+      commandId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "EntityTypes",
+          model: "Commands",
           key: "id"
         }
       },
-      isPrivate: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
+      defaultValue: {
+        type: DataTypes.STRING(250),
+        allowNull: true
+      },
+      sequence: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false
+      },
+      updatedAt: {
+        type: DataTypes.DATE
       }
     });
   },
-  down: (sequelize, DataTypes) => {
-    return sequelize.dropTable("Activities");
+  down: function(sequelize, DataTypes) {
+    return sequelize.dropTable("CommandVars");
   }
 };

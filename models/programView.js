@@ -1,8 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
   var ProgramView = sequelize.define("ProgramView", {
-    userId: DataTypes.INTEGER,
-    programId: DataTypes.INTEGER,
-    createdAt: DataTypes.DATE
+    userId: {
+      type: DataTypes.INTEGER
+    },
+    programId: {
+      type: DataTypes.INTEGER
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    }
   });
 
   ProgramView.associate = models => {

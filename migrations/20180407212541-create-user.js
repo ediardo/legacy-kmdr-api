@@ -8,28 +8,28 @@ module.exports = {
         type: DataTypes.INTEGER
       },
       username: {
-        type: DataTypes.STRING(22)
+        type: DataTypes.STRING(22),
+        allowNull: false
       },
       name: {
         type: DataTypes.STRING(45)
       },
       email: {
-        type: DataTypes.STRING(70)
+        type: DataTypes.STRING(70),
+        allowNull: false
       },
       password: {
         type: DataTypes.STRING(100)
       },
       websiteUrl: {
-        type: DataTypes.STRING(100),
-        validate: {
-          isUrl: true
-        }
+        type: DataTypes.STRING(100)
       },
       twitterHandle: {
         type: DataTypes.STRING(40)
       },
       status: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       lastLogin: {
         type: DataTypes.DATE
@@ -59,7 +59,7 @@ module.exports = {
       }
     });
   },
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable("Users");
+  down: function(sequelize, DataTypes) {
+    return sequelize.dropTable("Users");
   }
 };

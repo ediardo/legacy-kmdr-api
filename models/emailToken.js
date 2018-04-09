@@ -1,10 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   var EmailToken = sequelize.define("EmailToken", {
     userId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     token: {
       type: DataTypes.STRING(64),
+      allowNull: false,
       validate: {
         notEmpty: true
       }
@@ -14,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0
     },
     createdAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false
     },
     updatedAt: {
       type: DataTypes.DATE
@@ -22,7 +25,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   EmailToken.associate = models => {
-    EmailToken.belongsTo(models.User, { foreignKey: "userId" });
+    EmailToken.belongsTo(models.User, {
+      foreignKey: "userId"
+    });
   };
 
   return EmailToken;

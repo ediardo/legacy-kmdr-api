@@ -1,6 +1,6 @@
 module.exports = {
-  up: (sequelize, DataTypes) => {
-    return sequelize.createTable("EmailTokens", {
+  up: function(sequelize, DataTypes) {
+    return sequelize.createTable("Vars", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,13 +15,13 @@ module.exports = {
           key: "id"
         }
       },
-      token: {
-        type: DataTypes.STRING(64),
+      name: {
+        type: DataTypes.STRING(65),
         allowNull: false
       },
-      status: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
+      defaultValue: {
+        type: DataTypes.STRING(200),
+        allowNull: true
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -32,7 +32,7 @@ module.exports = {
       }
     });
   },
-  down: (sequelize, DataTypes) => {
-    return sequelize.dropTable("EmailTokens");
+  down: function(sequelize, DataTypes) {
+    return sequelize.dropTable("Vars");
   }
 };

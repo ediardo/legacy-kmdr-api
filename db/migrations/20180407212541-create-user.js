@@ -38,7 +38,7 @@ module.exports = {
         type: DataTypes.STRING(15)
       },
       githubId: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING(20)
       },
       githubHandle: {
         type: DataTypes.STRING(50)

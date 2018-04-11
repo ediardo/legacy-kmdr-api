@@ -34,7 +34,7 @@ module.exports = {
       },
       createdAt: {
         type: DataTypes.DATE,
-        allowNull: false
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
       }
     });
   },

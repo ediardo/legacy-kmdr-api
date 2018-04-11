@@ -15,7 +15,7 @@ module.exports = {
           key: "id"
         }
       },
-      programId: {
+      platformId: {
         type: DataTypes.INTEGER,
         references: {
           model: "Platforms",
@@ -34,10 +34,7 @@ module.exports = {
         type: DataTypes.STRING
       },
       linkUrl: {
-        type: DataTypes.STRING(250),
-        validate: {
-          isUrl: true
-        }
+        type: DataTypes.STRING(250)
       },
       shortDescription: {
         type: DataTypes.STRING(300)
@@ -55,10 +52,11 @@ module.exports = {
       },
       createdAt: {
         type: DataTypes.DATE,
-        allowNull: false
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
       },
       updatedAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
       }
     });
   },

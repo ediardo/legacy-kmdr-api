@@ -1,6 +1,6 @@
 module.exports = {
   up: function(sequelize, DataTypes) {
-    return sequelize.createTable("Programs", {
+    return sequelize.createTable("ProgramViews", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -22,11 +22,12 @@ module.exports = {
         }
       },
       createdAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
       }
     });
   },
   down: function(sequelize, DataTypes) {
-    return sequelize.dropTable("Programs");
+    return sequelize.dropTable("ProgramViews");
   }
 };

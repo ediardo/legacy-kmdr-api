@@ -38,11 +38,12 @@ module.exports = {
         allowNull: true
       },
       createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
       },
       updatedAt: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
       }
     });
   },

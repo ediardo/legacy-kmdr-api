@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: true
     },
+    platformId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     cliName: {
       type: DataTypes.STRING(64)
     },

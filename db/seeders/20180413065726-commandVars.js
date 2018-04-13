@@ -2,14 +2,19 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("AbuseReports", [
+    return queryInterface.bulkInsert("CommandVars", [
       {
         id: 1,
-        userId: 1,
-        reason: "spam",
-        status: 1,
-        entityTypeId: 2,
-        entityId: 1
+        varId: 1,
+        commandId: 400,
+        sequence: 1
+      },
+      {
+        id: 2,
+        varId: 2,
+        commandId: 400,
+        sequence: 2,
+        defaultValue: "override"
       }
     ]);
   },

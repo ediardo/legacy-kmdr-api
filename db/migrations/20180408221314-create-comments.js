@@ -37,6 +37,10 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: true
       },
+      status: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+      },
       createdAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")

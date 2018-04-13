@@ -2,16 +2,15 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
-      "Person",
-      [
-        {
-          name: "John Doe",
-          isBetaMember: false
-        }
-      ],
-      {}
-    );
+    return queryInterface.bulkInsert("Comments", [
+      {
+        id: 1,
+        userId: 1,
+        comment: "This is very useful, ty.",
+        isPartial: false,
+        status: 1
+      }
+    ]);
   },
 
   down: (queryInterface, Sequelize) => {

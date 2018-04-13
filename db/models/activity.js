@@ -9,6 +9,9 @@ module.exports = function(sequelize, DataTypes) {
     entityType: {
       type: DataTypes.STRING
     },
+    entityActionId: {
+      type: DataTypes.INTEGER
+    },
     isPrivate: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
@@ -20,6 +23,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Activity.associate = models => {
     Activity.belongsTo(models.EntityType, { foreignKey: "entityTypeId" });
+    Activity.belongsTo(models.EntityAction, { foreignKey: "entityActionId" });
     Activity.belongsTo(models.User, { foreignKey: "userId" });
   };
   return Activity;

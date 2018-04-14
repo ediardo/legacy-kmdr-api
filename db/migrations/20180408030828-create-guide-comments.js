@@ -1,6 +1,6 @@
 module.exports = {
   up: function(sequelize, DataTypes) {
-    return sequelize.createTable("CommandComments", {
+    return sequelize.createTable("GuideComments", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,13 +19,13 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "commentId",
+          model: "Comments",
           key: "id"
         }
       }
     });
   },
   down: function(sequelize, DataTypes) {
-    return sequelize.dropTable("CommandComments");
+    return sequelize.dropTable("GuideComments");
   }
 };

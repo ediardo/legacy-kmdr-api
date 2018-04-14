@@ -19,7 +19,7 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "commentId",
+          model: "Comments",
           key: "id"
         }
       }

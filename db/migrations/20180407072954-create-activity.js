@@ -28,6 +28,14 @@ module.exports = {
           key: "id"
         }
       },
+      entityActionId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "EntityActions",
+          key: "id"
+        }
+      },
       isPrivate: {
         type: DataTypes.BOOLEAN,
         defaultValue: true

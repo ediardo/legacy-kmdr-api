@@ -1,6 +1,6 @@
 module.exports = {
   up: function(sequelize, DataTypes) {
-    return sequelize.createTable("EntityTypes", {
+    return sequelize.createTable("EntityActions", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,6 +14,6 @@ module.exports = {
     });
   },
   down: function(sequelize, DataTypes) {
-    return sequelize.dropTable("EntityTypes");
+    return sequelize.dropTable("EntityActions");
   }
 };

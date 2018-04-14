@@ -1,17 +1,12 @@
-"use strict";
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
-      "Person",
-      [
-        {
-          name: "John Doe",
-          isBetaMember: false
-        }
-      ],
-      {}
-    );
+    return queryInterface.bulkInsert("GuideStars", [
+      {
+        id: 1,
+        guideId: 1,
+        starId: 4
+      }
+    ]);
   },
 
   down: (queryInterface, Sequelize) => {

@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("Guides", [
@@ -12,7 +10,7 @@ module.exports = {
         status: 1,
         listed: true,
         vanityUrl: "generating-new-ssh-key-adding-it-to-ssh-agent",
-        hashUlr: "xAm10912"
+        hashUrl: "xAm10912"
       }
     ]);
   },

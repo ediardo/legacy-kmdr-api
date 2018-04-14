@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
   var CommandComment = sequelize.define("CommandComment", {
-    guideId: DataTypes.INTEGER,
-    commmentId: DataTypes.INTEGER
+    commandId: DataTypes.INTEGER,
+    commentId: DataTypes.INTEGER
   });
 
   CommandComment.associate = models => {

@@ -1,17 +1,21 @@
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkInsert('Person', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+    return queryInterface.bulkInsert("GuideCommands", [
+      {
+        id: 1,
+        guideId: 1,
+        commandId: 2183,
+        step: 1,
+        stepDescription: "Generate a SSH Key"
+      },
+      {
+        id: 2,
+        guideId: 1,
+        commandId: 3326,
+        step: 2,
+        stepDescription: "Add the key to the SSH Agent"
+      }
+    ]);
   },
 
   down: (queryInterface, Sequelize) => {

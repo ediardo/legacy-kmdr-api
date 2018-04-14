@@ -26,6 +26,10 @@ module.exports = {
       {
         id: 6,
         name: "program"
+      },
+      {
+        id: 7,
+        name: "var"
       }
     ]);
   },

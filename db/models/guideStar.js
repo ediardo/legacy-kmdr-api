@@ -15,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
       */
     },
     {
-      timestamps: true
+      timestamps: true,
+      updatedAt: false
     }
   );
 

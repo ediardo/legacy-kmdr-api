@@ -1,27 +1,27 @@
-import { 
+import {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
-  GraphQLNonNull,
-} from 'graphql';
+  GraphQLNonNull
+} from "graphql";
 
-import userType from './user';
-import db from '../../../models';
+import userType from "./user";
+import db from "../../../../db/models";
 
-const commentType = new GraphQLObjectType({
-  name: 'Comment',
+const Program = new GraphQLObjectType({
+  name: "Program",
   fields: () => ({
     id: {
-      type: new GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(GraphQLID)
     },
     userId: {
-      type: GraphQLID,
+      type: GraphQLID
     },
     kommandrId: {
-      type: GraphQLID,
+      type: GraphQLID
     },
     comment: {
-      type: GraphQLString,
+      type: GraphQLString
     },
     author: {
       type: userType,
@@ -31,13 +31,13 @@ const commentType = new GraphQLObjectType({
     },
     createdAt: {
       type: GraphQLString,
-      description: 'Timestamp',
+      description: "Timestamp"
     },
     updatedAt: {
       type: GraphQLString,
-      description: 'Timestamp',
-    },
+      description: "Timestamp"
+    }
   })
 });
 
-export default commentType;
+export default Program;

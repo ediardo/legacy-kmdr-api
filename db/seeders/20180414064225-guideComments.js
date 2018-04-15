@@ -2,9 +2,11 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("GuideComments", [
       {
-        id: 1,
-        commentId: 1,
-        guideId: 1
+        id: 3,
+        guideId: 1,
+        userId: 1,
+        comment: "Just what I was looking for",
+        status: 1
       }
     ]);
   },

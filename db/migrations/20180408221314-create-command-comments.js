@@ -1,7 +1,6 @@
-"use strict";
 module.exports = {
   up: function(sequelize, DataTypes) {
-    return sequelize.createTable("Comments", {
+    return sequelize.createTable("CommandComments", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,6 +12,13 @@ module.exports = {
         allowNull: false,
         references: {
           model: "Users",
+          key: "id"
+        }
+      },
+      commandId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "Commands",
           key: "id"
         }
       },
@@ -42,16 +48,17 @@ module.exports = {
         defaultValue: 1
       },
       createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
+        type: DataTypes.DATE
       },
       updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
+        type: DataTypes.DATE
+      },
+      deletedAt: {
+        type: DataTypes.DATE
       }
     });
   },
   down: function(sequelize, DataTypes) {
-    return sequelize.dropTable("Comments");
+    return sequelize.dropTable("CommandComments");
   }
 };

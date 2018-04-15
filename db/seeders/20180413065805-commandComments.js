@@ -3,13 +3,19 @@ module.exports = {
     return queryInterface.bulkInsert("CommandComments", [
       {
         id: 1,
-        commentId: 2,
-        commandId: 2183
+        userId: 1,
+        commandId: 2133,
+        comment: "This is very useful, ty.",
+        isPartial: false,
+        status: 1
       },
       {
         id: 2,
-        commentId: 3,
-        commandId: 2183
+        userId: 1,
+        commandId: 654,
+        comment: "Is this working?",
+        isPartial: false,
+        status: 1
       }
     ]);
   },

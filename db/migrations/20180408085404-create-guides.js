@@ -54,13 +54,13 @@ module.exports = {
         defaultValue: 0
       },
       createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
+        type: DataTypes.DATE
       },
       updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
+        type: DataTypes.DATE
+      },
+      deletedAt: {
+        type: DataTypes.DATE
       }
     });
   },

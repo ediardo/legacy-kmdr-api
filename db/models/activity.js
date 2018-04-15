@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     entityId: {
       type: DataTypes.INTEGER
     },
-    entityType: {
+    entityTypeId: {
       type: DataTypes.STRING
     },
     entityActionId: {
@@ -17,6 +17,9 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: true
     },
     createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
       type: DataTypes.DATE
     }
   });

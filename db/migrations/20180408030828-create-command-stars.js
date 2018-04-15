@@ -7,6 +7,14 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id"
+        }
+      },
       commandId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -15,13 +23,8 @@ module.exports = {
           key: "id"
         }
       },
-      starId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Stars",
-          key: "id"
-        }
+      createdAt: {
+        type: DataTypes.INTEGER
       }
     });
   },

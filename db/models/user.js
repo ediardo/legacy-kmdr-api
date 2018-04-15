@@ -67,8 +67,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false
     },
     createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type: DataTypes.DATE
     },
     updatedAt: {
       type: DataTypes.DATE
@@ -102,10 +101,16 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.ProgramView, {
       foreignKey: "userId"
     });
-    User.hasMany(models.Star, {
+    User.hasMany(models.GuideStar, {
       foreignKey: "userId"
     });
-    User.hasMany(models.Comment, {
+    User.hasMany(models.CommandStar, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.CommandComment, {
+      foreignKey: "userId"
+    });
+    User.hasMany(models.GuideComment, {
       foreignKey: "userId"
     });
     User.hasMany(models.Guide, {

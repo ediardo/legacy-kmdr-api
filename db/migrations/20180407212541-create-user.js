@@ -51,12 +51,10 @@ module.exports = {
         defaultValue: false
       },
       createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
+        type: DataTypes.DATE
       },
       updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
+        type: DataTypes.DATE
       }
     });
   },

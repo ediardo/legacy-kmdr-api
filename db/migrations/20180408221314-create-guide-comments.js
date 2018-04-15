@@ -7,21 +7,41 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      guideId: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "Users",
+          key: "id"
+        }
+      },
+      guideId: {
+        type: DataTypes.INTEGER,
         references: {
           model: "Guides",
           key: "id"
         }
       },
-      commentId: {
+      replyTo: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Comments",
-          key: "id"
-        }
+        allowNull: true
+      },
+      comment: {
+        type: DataTypes.STRING(1000),
+        allowNull: false
+      },
+      status: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+      },
+      createdAt: {
+        type: DataTypes.DATE
+      },
+      updatedAt: {
+        type: DataTypes.DATE
+      },
+      deletedAt: {
+        type: DataTypes.DATE
       }
     });
   },

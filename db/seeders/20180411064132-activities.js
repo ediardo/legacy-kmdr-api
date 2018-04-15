@@ -7,7 +7,8 @@ module.exports = {
         entityTypeId: 1,
         entityId: 1,
         entityActionId: 1,
-        isPrivate: false
+        isPrivate: false,
+        createdAt: new Date()
       }
     ]);
   },

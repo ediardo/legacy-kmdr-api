@@ -1,20 +1,27 @@
 module.exports = function(sequelize, DataTypes) {
-  var GuideStar = sequelize.define("GuideStar", {
-    guideId: {
-      type: DataTypes.INTEGER
+  var GuideStar = sequelize.define(
+    "GuideStar",
+    {
+      guideId: {
+        type: DataTypes.INTEGER
+      },
+      userId: {
+        type: DataTypes.INTEGER
+      }
+      /*
+      createdAt: {
+        type: DataTypes.INTEGER
+      }
+      */
     },
-    userId: {
-      type: DataTypes.INTEGER
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
+    {
+      timestamps: true
     }
-  });
+  );
 
   GuideStar.associate = models => {
-    GuideStar.belongsTo(models.Star, {
-      foreignKey: "starId"
+    GuideStar.belongsTo(models.User, {
+      foreignKey: "userId"
     });
     GuideStar.belongsTo(models.Guide, {
       foreignKey: "guideId"

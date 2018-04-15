@@ -4,6 +4,9 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const commands = commandSamples.map(command => {
       command.sourceId = 2;
+      if (command.id === 2183 || command.id === 3326) {
+        command.userId = 1;
+      }
       return command;
     });
     return queryInterface.bulkInsert("Commands", commands, {});

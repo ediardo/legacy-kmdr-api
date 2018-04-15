@@ -1,66 +1,72 @@
 var Hashids = require("hashids");
 
 module.exports = function(sequelize, DataTypes) {
-  var Command = sequelize.define("Command", {
-    programId: {
-      type: DataTypes.INTEGER
-    },
-    userId: {
-      type: DataTypes.INTEGER
-    },
-    sourceId: {
-      type: DataTypes.INTEGER
-    },
-    title: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
-        min: 1
+  var Command = sequelize.define(
+    "Command",
+    {
+      programId: {
+        type: DataTypes.INTEGER
+      },
+      userId: {
+        type: DataTypes.INTEGER
+      },
+      sourceId: {
+        type: DataTypes.INTEGER
+      },
+      title: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+          min: 1
+        }
+      },
+      rawContent: {
+        type: DataTypes.STRING(500),
+        validate: {
+          notEmpty: true,
+          min: 2
+        }
+      },
+      description: {
+        type: DataTypes.STRING(500)
+      },
+      hashUrl: {
+        type: DataTypes.STRING(9)
+      },
+      forkFrom: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+      },
+      vanityUrl: {
+        type: DataTypes.STRING(65)
+      },
+      totalViews: {
+        type: DataTypes.INTEGER
+      },
+      totalStars: {
+        type: DataTypes.INTEGER
+      },
+      totalComments: {
+        type: DataTypes.INTEGER
+      },
+      totalForks: {
+        type: DataTypes.INTEGER
+      },
+      status: {
+        type: DataTypes.INTEGER
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      updatedAt: {
+        type: DataTypes.DATE
       }
     },
-    rawContent: {
-      type: DataTypes.STRING(500),
-      validate: {
-        notEmpty: true,
-        min: 2
-      }
-    },
-    description: {
-      type: DataTypes.STRING(500)
-    },
-    hashUrl: {
-      type: DataTypes.STRING(9)
-    },
-    forkFrom: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    vanityUrl: {
-      type: DataTypes.STRING(65)
-    },
-    totalViews: {
-      type: DataTypes.INTEGER
-    },
-    totalStars: {
-      type: DataTypes.INTEGER
-    },
-    totalComments: {
-      type: DataTypes.INTEGER
-    },
-    totalForks: {
-      type: DataTypes.INTEGER
-    },
-    status: {
-      type: DataTypes.INTEGER
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE
+    {
+      paranoid: true
     }
-  });
+  );
 
   Command.associate = models => {
     Command.belongsTo(models.User, {
@@ -69,23 +75,17 @@ module.exports = function(sequelize, DataTypes) {
     Command.belongsTo(models.Program, {
       foreignKey: "programId"
     });
-    Command.belongSToMany(models.Var, {
+    Command.belongsToMany(models.Var, {
       foreignKey: "commandId",
       through: {
         model: "CommandVar"
       }
     });
-    Command.belongsToMany(models.Comment, {
-      foreignKey: "kommandrId",
-      through: {
-        model: "CommandComment"
-      }
+    Command.hasMany(models.CommandComment, {
+      foreignKey: "commandId"
     });
-    Command.belongsToMany(models.Star, {
-      foreignKey: "kommandrId",
-      through: {
-        model: "CommandStar"
-      }
+    Command.hasMany(models.CommandStar, {
+      foreignKey: "commandId"
     });
     Command.hasMany(models.Command, {
       foreignKey: "forkFrom",

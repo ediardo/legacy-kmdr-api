@@ -1,11 +1,60 @@
 module.exports = function(sequelize, DataTypes) {
-  var CommandComment = sequelize.define("CommandComment", {
-    commandId: DataTypes.INTEGER,
-    commentId: DataTypes.INTEGER
-  });
+  var CommandComment = sequelize.define(
+    "CommandComment",
+    {
+      userId: {
+        type: DataTypes.INTEGER
+      },
+      commandId: {
+        type: DataTypes.INTEGER
+      },
+      replyTo: {
+        type: DataTypes.INTEGER
+      },
+      comment: {
+        type: DataTypes.STRING(1000),
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
+      posStart: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          min: 0
+        }
+      },
+      posEnd: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: null,
+        validate: {
+          min: 1
+        }
+      },
+      isPartial: {
+        type: DataTypes.BOOLEAN,
+        defaultFalue: false
+      },
+      createdAt: {
+        type: DataTypes.DATE
+      },
+      updatedAt: {
+        type: DataTypes.DATE
+      },
+      deletedAt: {
+        type: DataTypes.DATE
+      }
+    },
+    {
+      timestamps: true
+    }
+  );
 
   CommandComment.associate = models => {
-    CommandComment.belongsTo(models.Comment, { foreignKey: "commentId" });
+    CommandComment.belongsTo(models.User, { foreignKey: "userId" });
     CommandComment.belongsTo(models.Command, { foreignKey: "commandId" });
   };
 

@@ -1,19 +1,27 @@
 module.exports = function(sequelize, DataTypes) {
-  var CommandStar = sequelize.define("CommandStar", {
-    commandId: {
-      type: DataTypes.INTEGER
+  var CommandStar = sequelize.define(
+    "CommandStar",
+    {
+      commandId: {
+        type: DataTypes.INTEGER
+      },
+      userId: {
+        type: DataTypes.INTEGER
+      }
+      /*
+      createdAt: {
+        type: DataTypes.INTEGER
+      }
+      */
     },
-    starId: {
-      type: DataTypes.INTEGER
-    },
-    createdAt: {
-      type: DataTypes.DATE
+    {
+      timestamps: true
     }
-  });
+  );
 
   CommandStar.associate = models => {
-    CommandStar.belongsTo(models.Star, {
-      foreignKey: "starId"
+    CommandStar.belongsTo(models.User, {
+      foreignKey: "userId"
     });
     CommandStar.belongsTo(models.Command, {
       foreignKey: "commandId"

@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(45)
     },
     description: {
-      type: DataTypes.STING(150)
+      type: DataTypes.STRING(150)
     },
     createdAt: {
       type: DataTypes.DATE

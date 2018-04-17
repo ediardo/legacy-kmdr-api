@@ -1,24 +1,24 @@
 module.exports = function(sequelize, DataTypes) {
-  var GuideVar = sequelize.define("GuideVar", {
-    userId: {
-      type: DataTypes.INTEGER
+  var GuideVar = sequelize.define(
+    "GuideVar",
+    {
+      userId: {
+        type: DataTypes.INTEGER
+      },
+      name: {
+        type: DataTypes.STRING(65)
+      },
+      defaultValue: {
+        type: DataTypes.STRING(250)
+      },
+      sequence: {
+        type: DataTypes.INTEGER
+      }
     },
-    name: {
-      type: DataTypes.STRING(65)
-    },
-    defaultValue: {
-      type: DataTypes.STRING(250)
-    },
-    sequence: {
-      type: DataTypes.INTEGER
-    },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
+    {
+      timestamps: true
     }
-  });
+  );
 
   GuideVar.associate = models => {
     GuideVar.belongsTo(models.User, {

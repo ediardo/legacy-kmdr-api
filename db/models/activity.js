@@ -1,28 +1,28 @@
 module.exports = function(sequelize, DataTypes) {
-  var Activity = sequelize.define("Activity", {
-    userId: {
-      type: DataTypes.INTEGER
+  var Activity = sequelize.define(
+    "Activity",
+    {
+      userId: {
+        type: DataTypes.INTEGER
+      },
+      entityId: {
+        type: DataTypes.INTEGER
+      },
+      entityTypeId: {
+        type: DataTypes.STRING
+      },
+      entityActionId: {
+        type: DataTypes.INTEGER
+      },
+      isPrivate: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+      }
     },
-    entityId: {
-      type: DataTypes.INTEGER
-    },
-    entityTypeId: {
-      type: DataTypes.STRING
-    },
-    entityActionId: {
-      type: DataTypes.INTEGER
-    },
-    isPrivate: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
-    },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
+    {
+      timestamps: true
     }
-  });
+  );
 
   Activity.associate = models => {
     Activity.belongsTo(models.EntityType, { foreignKey: "entityTypeId" });

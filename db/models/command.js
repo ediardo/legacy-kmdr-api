@@ -54,16 +54,10 @@ module.exports = function(sequelize, DataTypes) {
       },
       status: {
         type: DataTypes.INTEGER
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
-      updatedAt: {
-        type: DataTypes.DATE
       }
     },
     {
+      timestamps: true,
       paranoid: true
     }
   );

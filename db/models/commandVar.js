@@ -1,24 +1,24 @@
 module.exports = function(sequelize, DataTypes) {
-  var CommandVar = sequelize.define("CommandVar", {
-    userId: {
-      type: DataTypes.INTEGER
+  var CommandVar = sequelize.define(
+    "CommandVar",
+    {
+      userId: {
+        type: DataTypes.INTEGER
+      },
+      name: {
+        type: DataTypes.STRING(65)
+      },
+      defaultValue: {
+        type: DataTypes.STRING(250)
+      },
+      sequence: {
+        type: DataTypes.INTEGER
+      }
     },
-    name: {
-      type: DataTypes.STRING(65)
-    },
-    defaultValue: {
-      type: DataTypes.STRING(250)
-    },
-    sequence: {
-      type: DataTypes.INTEGER
-    },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
+    {
+      timestamps: true
     }
-  });
+  );
 
   CommandVar.associate = models => {
     CommandVar.belongsTo(models.User, {

@@ -6,14 +6,16 @@ module.exports = {
         guideId: 1,
         commandId: 2183,
         step: 1,
-        stepDescription: "Generate a SSH Key"
+        stepDescription: "Generate a SSH Key",
+        createdAt: new Date()
       },
       {
         id: 2,
         guideId: 1,
         commandId: 3326,
         step: 2,
-        stepDescription: "Add the key to the SSH Agent"
+        stepDescription: "Add the key to the SSH Agent",
+        createdAt: new Date()
       }
     ]);
   },

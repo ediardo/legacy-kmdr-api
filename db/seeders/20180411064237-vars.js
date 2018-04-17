@@ -5,13 +5,15 @@ module.exports = {
         id: 1,
         userId: 1,
         name: "testPath",
-        defaultValue: "path/to/test"
+        defaultValue: "path/to/test",
+        createdAt: new Date()
       },
       {
         id: 2,
         userId: 1,
         name: "username",
-        defaultValue: "default"
+        defaultValue: "default",
+        createdAt: new Date()
       }
     ]);
   },

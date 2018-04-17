@@ -5,7 +5,8 @@ module.exports = {
         id: 1,
         guideId: 1,
         varId: 2,
-        sequence: 1
+        sequence: 1,
+        createdAt: new Date()
       }
     ]);
   },

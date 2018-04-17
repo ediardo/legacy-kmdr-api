@@ -4,17 +4,20 @@ module.exports = {
       {
         id: 1,
         userId: 1,
-        commandId: 3800
+        commandId: 3800,
+        createdAt: new Date()
       },
       {
         id: 2,
         userId: 1,
-        commandId: 1256
+        commandId: 1256,
+        createdAt: new Date()
       },
       {
         id: 3,
         userId: 1,
-        commandId: 2445
+        commandId: 2445,
+        createdAt: new Date()
       }
     ]);
   },

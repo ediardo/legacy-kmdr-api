@@ -45,18 +45,10 @@ module.exports = function(sequelize, DataTypes) {
       totalCommands: {
         type: DataTypes.INTEGER,
         defaultValue: 0
-      },
-      createdAt: {
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        type: DataTypes.DATE
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
     },
     {
+      timestamps: true,
       paranoid: true
     }
   );

@@ -4,7 +4,8 @@ module.exports = {
       {
         id: 1,
         guideId: 1,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       }
     ]);
   },

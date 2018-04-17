@@ -7,7 +7,8 @@ module.exports = {
         reason: "spam",
         status: 1,
         entityTypeId: 2,
-        entityId: 1
+        entityId: 1,
+        createdAt: new Date()
       }
     ]);
   },

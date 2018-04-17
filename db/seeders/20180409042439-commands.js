@@ -4,6 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const commands = commandSamples.map(command => {
       command.sourceId = 2;
+      command.createdAt = new Date();
       if (command.id === 2183 || command.id === 3326) {
         command.userId = 1;
       }

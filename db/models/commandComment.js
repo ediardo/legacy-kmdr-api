@@ -37,15 +37,6 @@ module.exports = function(sequelize, DataTypes) {
       isPartial: {
         type: DataTypes.BOOLEAN,
         defaultFalue: false
-      },
-      createdAt: {
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        type: DataTypes.DATE
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
     },
     {

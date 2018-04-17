@@ -4,42 +4,50 @@ module.exports = {
       {
         id: 1,
         programId: 472,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       },
       {
         id: 2,
         programId: 472,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       },
       {
         id: 3,
         programId: 473,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       },
       {
         id: 4,
         programId: 473,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       },
       {
         id: 5,
         programId: 472,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       },
       {
         id: 6,
         programId: 472,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       },
       {
         id: 7,
         programId: 473,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       },
       {
         id: 8,
         programId: 474,
-        userId: 1
+        userId: 1,
+        createdAt: new Date()
       }
     ]);
   },

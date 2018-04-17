@@ -21,17 +21,6 @@ module.exports = function(sequelize, DataTypes) {
       status: {
         type: DataTypes.INTEGER
       }
-      /*
-      createdAt: {
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        type: DataTypes.DATE
-      },
-      deletedAt: {
-        type: DataTypes.DATE
-      }
-      */
     },
     {
       timestamps: true

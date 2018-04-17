@@ -8,11 +8,6 @@ module.exports = function(sequelize, DataTypes) {
       userId: {
         type: DataTypes.INTEGER
       }
-      /*
-      createdAt: {
-        type: DataTypes.INTEGER
-      }
-      */
     },
     {
       timestamps: true,

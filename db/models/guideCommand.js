@@ -1,26 +1,26 @@
 module.exports = function(sequelize, DataTypes) {
-  var GuideCommand = sequelize.define("GuideCommand", {
-    commandId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+  var GuideCommand = sequelize.define(
+    "GuideCommand",
+    {
+      commandId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      guideId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      step: {
+        type: DataTypes.INTEGER
+      },
+      stepDescription: {
+        type: DataTypes.STRING(250)
+      }
     },
-    guideId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    step: {
-      type: DataTypes.INTEGER
-    },
-    stepDescription: {
-      type: DataTypes.STRING(250)
-    },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
+    {
+      timestamps: true
     }
-  });
+  );
 
   GuideCommand.associate = models => {
     GuideCommand.belongsTo(models.Command, {

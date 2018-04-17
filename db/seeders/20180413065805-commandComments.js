@@ -7,7 +7,8 @@ module.exports = {
         commandId: 2133,
         comment: "This is very useful, ty.",
         isPartial: false,
-        status: 1
+        status: 1,
+        createdAt: new Date()
       },
       {
         id: 2,
@@ -15,7 +16,8 @@ module.exports = {
         commandId: 654,
         comment: "Is this working?",
         isPartial: false,
-        status: 1
+        status: 1,
+        createdAt: new Date()
       }
     ]);
   },

@@ -6,7 +6,8 @@ module.exports = {
         guideId: 1,
         userId: 1,
         comment: "Just what I was looking for",
-        status: 1
+        status: 1,
+        createdAt: new Date()
       }
     ]);
   },

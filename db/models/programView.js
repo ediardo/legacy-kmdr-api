@@ -1,15 +1,22 @@
 module.exports = function(sequelize, DataTypes) {
-  var ProgramView = sequelize.define("ProgramView", {
-    userId: {
-      type: DataTypes.INTEGER
+  var ProgramView = sequelize.define(
+    "ProgramView",
+    {
+      userId: {
+        type: DataTypes.INTEGER
+      },
+      programId: {
+        type: DataTypes.INTEGER
+      },
+      createdAt: {
+        type: DataTypes.DATE
+      }
     },
-    programId: {
-      type: DataTypes.INTEGER
-    },
-    createdAt: {
-      type: DataTypes.DATE
+    {
+      timestamps: true,
+      updatedAt: false
     }
-  });
+  );
 
   ProgramView.associate = models => {
     ProgramView.belongsTo(models.Program, { foreignKey: "programId" });

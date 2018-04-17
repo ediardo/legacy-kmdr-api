@@ -10,7 +10,8 @@ module.exports = {
         status: 1,
         listed: true,
         vanityUrl: "generating-new-ssh-key-adding-it-to-ssh-agent",
-        hashUrl: "xAm10912"
+        hashUrl: "xAm10912",
+        createdAt: new Date()
       }
     ]);
   },

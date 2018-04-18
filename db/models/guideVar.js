@@ -2,12 +2,6 @@ module.exports = function(sequelize, DataTypes) {
   var GuideVar = sequelize.define(
     "GuideVar",
     {
-      userId: {
-        type: DataTypes.INTEGER
-      },
-      name: {
-        type: DataTypes.STRING(65)
-      },
       defaultValue: {
         type: DataTypes.STRING(250)
       },
@@ -21,9 +15,6 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   GuideVar.associate = models => {
-    GuideVar.belongsTo(models.User, {
-      foreignKey: "userId"
-    });
     GuideVar.belongsTo(models.Var, {
       foreignKey: "varId"
     });

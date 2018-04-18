@@ -23,10 +23,10 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: "userId"
     });
     Var.hasMany(models.CommandVar, {
-      foreignKey: "starId"
+      foreignKey: "varId"
     });
     Var.hasMany(models.GuideVar, {
-      foreignKey: "starId"
+      foreignKey: "varId"
     });
   };
 

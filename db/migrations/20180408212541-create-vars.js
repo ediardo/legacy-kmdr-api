@@ -28,8 +28,10 @@ module.exports = {
         defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
       },
       updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.literal("CURRENT_TIMESTAMP")
+        type: DataTypes.DATE
+      },
+      deletedAt: {
+        type: DataTypes.DATE
       }
     });
   },

@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "sourceId"
     });
     Program.belongsTo(models.Platform, {
-      foreignKey: "programId"
+      foreignKey: "platformId"
     });
     Program.hasMany(models.Command, {
       foreignKey: "programId"

@@ -2,11 +2,13 @@ import {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLList,
+  GraphQLInt
 } from "graphql";
 
-import userType from "./user";
-import db from "../../../../db/models";
+import Command from "./command";
+import Platform from "./platform";
 
 const Program = new GraphQLObjectType({
   name: "Program",
@@ -14,20 +16,28 @@ const Program = new GraphQLObjectType({
     id: {
       type: new GraphQLNonNull(GraphQLID)
     },
-    userId: {
-      type: GraphQLID
-    },
-    kommandrId: {
-      type: GraphQLID
-    },
-    comment: {
+    cliName: {
       type: GraphQLString
     },
-    author: {
-      type: userType,
-      resolve: (comment, argx, ctx) => {
-        return db.User.findById(comment.userId);
-      }
+    name: {
+      type: GraphQLString
+    },
+    totalViews: {
+      type: GraphQLInt
+    },
+    totalCommands: {
+      type: GraphQLInt
+    },
+    shortDescription: {
+      type: GraphQLString
+    },
+    platform: {
+      type: Platform,
+      resolve: command => command.Platform
+    },
+    commands: {
+      type: new GraphQLList(Command),
+      resolve: program => program.getCommands()
     },
     createdAt: {
       type: GraphQLString,

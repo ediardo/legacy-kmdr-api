@@ -20,32 +20,24 @@ import db from "../../../../db/models";
 
 const User = new GraphQLObjectType({
   name: "User",
-  fields: () => ({
+  fields: {
     id: {
-      type: GraphQLID,
-      resolve: user => user.id
+      type: GraphQLID
     },
     name: {
-      type: GraphQLString,
-      resolve: user => user.name
+      type: GraphQLString
     },
     username: {
-      type: GraphQLString,
-      resolve: user => user.username
+      type: GraphQLString
     },
     email: {
-      type: GraphQLString,
-      resolve: (user, args, ctx) => {
-        return user.email;
-      }
+      type: GraphQLString
     },
     websiteUrl: {
-      type: GraphQLString,
-      resolve: user => user.website
+      type: GraphQLString
     },
     twittlerHandle: {
-      type: GraphQLString,
-      resolve: user => user.twitterHanddle
+      type: GraphQLString
     },
     status: {
       type: GraphQLInt
@@ -82,27 +74,22 @@ const User = new GraphQLObjectType({
       type: new GraphQLList(Activity),
       resolve: user => user.getActivities()
     },
-
     commandComments: {
       type: new GraphQLList(CommandComment),
       resolve: user => user.getCommandComments()
     },
-
     guideComments: {
       type: new GraphQLList(GuideComment),
       resolve: user => user.getGuideComments()
     },
-
     commands: {
       type: new GraphQLList(Command),
       resolve: user => user.getCommands()
     },
-
     guides: {
       type: new GraphQLList(Guide),
       resolve: user => user.getGuides()
     },
-
     commandStars: {
       type: new GraphQLList(CommandStar),
       resolve: user => user.getCommandStars()
@@ -110,8 +97,12 @@ const User = new GraphQLObjectType({
     guideStars: {
       type: new GraphQLList(GuideStar),
       resolve: user => user.getGuideStars()
+    },
+    vars: {
+      type: new GraphQLList(Var),
+      resolve: user => user.getVars()
     }
-  })
+  }
 });
 
 export default User;

@@ -2,24 +2,40 @@ import {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLInt
 } from "graphql";
 
 const Var = new GraphQLObjectType({
   name: "Var",
   fields: () => ({
     id: {
-      type: new GraphQLNonNull(GraphQLID)
+      type: GraphQLID
     },
     userId: {
       type: new GraphQLNonNull(GraphQLID)
     },
     name: {
       type: GraphQLString,
-      description: "Identifier of the variable"
+      description: "Identifier of the variable",
+      resolve: Var => {
+        return Var.Var ? Var.Var.name : Var.name;
+      }
     },
     defaultValue: {
-      type: GraphQLString
+      type: GraphQLString,
+      resolve: Var => {
+        return Var.Var ? Var.Var.defaultValue : Var.defaultValue;
+      }
+    },
+    overrideValue: {
+      type: GraphQLString,
+      resolve: (root, args, context, info) => {
+        return root.get("overrideValue");
+      }
+    },
+    sequence: {
+      type: GraphQLInt
     },
     createdAt: {
       type: GraphQLString,

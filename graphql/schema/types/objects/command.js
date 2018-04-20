@@ -9,16 +9,20 @@ import {
 
 import User from "./user";
 import Var from "./var";
+import CommandComment from "./commandComment";
+import Fork from "./command";
+
+import db from "../../../../db/models";
 
 const Command = new GraphQLObjectType({
   name: "Command",
   fields: () => ({
     id: {
-      type: new GraphQLNonNull(GraphQLID),
+      type: GraphQLID,
       description: "ID of the command"
     },
     userId: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: GraphQLInt,
       description: "ID of the author"
     },
     sourceId: {
@@ -77,26 +81,39 @@ const Command = new GraphQLObjectType({
     },
     deletedAt: {
       type: GraphQLString
-    }
-    /*
+    },
     comments: {
-      type: new GraphQLList(Comment),
-      resolve: command => command.getComments()
+      type: new GraphQLList(CommandComment),
+      resolve: command => command.getCommandComments()
     },
     forks: {
-      type: new GraphQLList(Command),
+      type: new GraphQLList(Fork),
       resolve: command => command.getForks()
     },
-    stars: {
-      type: new GraphQLList(Star),
-      resolve: command => command.getStars()
-    },
-    
     vars: {
       type: new GraphQLList(Var),
-      resolve: command => command.getVars()
+      resolve: command => {
+        return db.CommandVar.findAll({
+          attributes: [
+            "id",
+            ["defaultValue", "overrideValue"],
+            "sequence",
+            "createdAt",
+            "updatedAt"
+          ],
+          include: [
+            {
+              model: db.Var,
+              attributes: ["name", "defaultValue"]
+            }
+          ],
+          where: {
+            commandId: command.id
+          },
+          order: [["sequence", "ASC"]]
+        });
+      }
     }
-    */
   })
 });
 

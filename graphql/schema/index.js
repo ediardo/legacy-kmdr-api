@@ -9,214 +9,61 @@ import {
 } from "graphql";
 
 import User from "./types/objects/user";
-
+import Command from "./types/objects/command";
+import Guide from "./types/objects/guide";
+import Program from "./types/objects/program";
 import db from "../../db/models";
 //import mutations from './mutations';
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
-  fields: {
-    /*
-    allCollections: {
-      type: new GraphQLList(collectionType),
-      args: {
-        name: {
-          description: "Name of the collection",
-          type: GraphQLString
-        }
-      },
-      resolve: (root, { name = "" }, ctx) => {
-        return db.Collection.findAll({
-          where: { name: { $like: `${name}%` } },
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    allCollectionsByUser: {
-      type: new GraphQLList(collectionType),
-      args: {
-        username: {
-          description: "User name",
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve: (root, { username }) => {
-        return db.Collection.findAll({
-          include: [
-            {
-              model: db.User,
-              where: { username }
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    allComments: {
-      type: new GraphQLList(commentType),
-      resolve: (root, args) => {
-        return db.Comment.findAll({
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    allCommentsByUser: {
-      type: new GraphQLList(commentType),
-      args: {
-        username: {
-          description: "User name",
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve: (root, { username }, ctx) => {
-        if (!ctx.user || ctx.user.username !== username) return null;
-        return db.Comment.findAll({
-          include: [
-            {
-              model: db.User,
-              where: { username }
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    allStarsByUser: {
-      type: new GraphQLList(starType),
-      args: {
-        username: {
-          description: "User name",
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve: (root, { username }) => {
-        return db.Star.findAll({
-          include: [
-            {
-              model: db.User,
-              where: { username }
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    allKommandrs: {
-      type: new GraphQLList(kommandrType),
-      args: {
-        title: {
-          type: GraphQLString
-        },
-        cli: {
-          type: GraphQLString
-        },
-        description: {
-          type: GraphQLString
-        }
-      },
-      resolve: (root, { title = "", cli = "", description = "" }, ctx) => {
-        console.log(ctx.headers);
-        let where = {};
-        if (title || cli || description) {
-          where = { $or: [] };
-          if (title) where.$or.push({ title: { $like: `%${title}%` } });
-          if (cli) where.$or.push({ cli: { $like: `%${cli}%` } });
-          if (description)
-            where.$or.push({ description: { $like: `${description}%` } });
-        }
-        return db.Kommandr.findAll({
-          include: [
-            {
-              model: db.User
-            }
-          ],
-          where,
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    allKommandrsByUser: {
-      type: new GraphQLList(kommandrType),
-      args: {
-        username: {
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve: (root, { username }, ctx) => {
-        return db.Kommandr.findAll({
-          include: [
-            {
-              model: db.User,
-              where: { username }
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    allUsers: {
-      type: new GraphQLList(userType),
-      args: {
-        username: {
-          description: "User name",
-          type: GraphQLString
-        }
-      },
-      resolve: (root, { username = "" }, ctx) => {
-        return db.User.findAll({
-          where: {
-            status: 1,
-            id: { ne: 0 },
-            username: { $like: `${username}%` }
-          }
-        });
-      }
-    },
-
-    currentUser: {
-      type: userType,
-      resolve: (root, args, ctx) => {
-        if (!ctx.user) return null;
-        return db.User.findById(ctx.user.id);
-      }
-    },
-
-    userById: {
-      type: userType,
+  fields: () => ({
+    command: {
+      type: Command,
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLID)
         }
       },
-      resolve: (root, { id }) => {
-        return db.User.findOne({
-          where: { id }
-        });
-      }
+      resolve: (root, { id }, context) => db.Command.findOne({ where: { id } })
     },
     commands: {
-      type: Command,
+      type: new GraphQLList(Command),
       resolve: () => db.Command.findAll()
     },
-    
-    comments: {
-      type: Comment,
-      resolve: () => db.Comment.findAll()
+    guide: {
+      type: new GraphQLNonNull(Guide),
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve: (root, { id }, ctx) => db.Guide.findOne({ where: { id } })
     },
-    */
-    users: {
-      type: new GraphQLList(User),
-      resolve: () => db.User.findAll()
-    }
-
-    /*
+    guides: {
+      type: new GraphQLList(Guide),
+      resolve: () => db.Guide.findAll()
+    },
+    program: {
+      type: Program,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve: (root, { id }, ctx) => db.Program.findOne({ where: { id } })
+    },
+    programs: {
+      type: new GraphQLList(Program),
+      resolve: () =>
+        db.Program.findAll({
+          include: [
+            {
+              model: db.Platform
+            }
+          ]
+        })
+    },
     user: {
       type: User,
       args: {
@@ -224,123 +71,15 @@ const RootQueryType = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (root, { username }) => {
-        return db.User.findOne({
-          where: { username }
-        });
+      resolve: (root, { username }, context) => {
+        return db.User.findOne({ where: { username } });
       }
+    },
+    users: {
+      type: new GraphQLList(User),
+      resolve: () => db.User.findAll()
     }
-
-    commentById: {
-      type: commentType,
-      args: {
-        id: {
-          description: "ID of the comment",
-          type: new GraphQLNonNull(GraphQLID)
-        }
-      },
-      resolve: (root, { id }) => {
-        return db.Comment.findById(id, {
-          include: [
-            {
-              model: db.User
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    kommandrById: {
-      type: kommandrType,
-      args: {
-        id: {
-          description: "ID of the kommandr",
-          type: new GraphQLNonNull(GraphQLID)
-        }
-      },
-      resolve: (root, { id }, ctx) => {
-        return db.Kommandr.findOne({
-          include: [
-            {
-              model: db.User
-            }
-          ],
-          where: { hashId: id }
-        }).then(kommandr => {
-          kommandr.increment("totalViews", {
-            silent: true
-          });
-          return kommandr;
-        });
-      }
-    },
-
-    collectionById: {
-      type: collectionType,
-      args: {
-        id: {
-          description: "ID of the collection",
-          type: new GraphQLNonNull(GraphQLID)
-        }
-      },
-      resolve(root, { id }) {
-        return db.Collection.findById(id, {
-          include: [
-            {
-              model: db.User
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    },
-
-    collectionByName: {
-      type: collectionType,
-      args: {
-        name: {
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve(root, { name }, ctx) {
-        if (!ctx.user) return null;
-        return db.Collection.findOne({
-          include: [
-            {
-              model: db.User,
-              where: { id: ctx.user.id }
-            }
-          ],
-          where: {
-            name
-          }
-        });
-      }
-    },
-
-    getActivity: {
-      type: new GraphQLList(activityType),
-      args: {
-        username: {
-          description: "User name",
-          type: GraphQLString
-        }
-      },
-      resolve(root, { username }, ctx) {
-        return db.Activity.findAll({
-          include: [
-            {
-              model: db.User,
-              where: { username }
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        });
-      }
-    }
-    */
-  }
+  })
 });
 
 const schema = new GraphQLSchema({

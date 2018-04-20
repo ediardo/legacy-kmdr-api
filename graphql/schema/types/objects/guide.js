@@ -9,7 +9,9 @@ import {
 } from "graphql";
 
 import User from "./user";
-import Tally from "../interfaces/tally";
+import Var from "./var";
+
+import db from "../../../../db/models";
 
 const Guide = new GraphQLObjectType({
   name: "Guide",
@@ -64,6 +66,30 @@ const Guide = new GraphQLObjectType({
     },
     deletedAt: {
       type: GraphQLString
+    },
+    vars: {
+      type: new GraphQLList(Var),
+      resolve: guide => {
+        return db.GuideVar.findAll({
+          attributes: [
+            "id",
+            ["defaultValue", "overrideValue"],
+            "sequence",
+            "createdAt",
+            "updatedAt"
+          ],
+          include: [
+            {
+              model: db.Var,
+              attributes: ["name", "defaultValue"]
+            }
+          ],
+          where: {
+            guideId: guide.id
+          },
+          order: [["sequence", "ASC"]]
+        });
+      }
     }
   })
 });

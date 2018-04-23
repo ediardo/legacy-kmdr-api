@@ -9,7 +9,6 @@ import {
 
 import User from "./user";
 import Command from "./command";
-import CommentInterface from "../interfaces/comment";
 
 const CommandComment = new GraphQLObjectType({
   name: "CommandComment",
@@ -63,8 +62,7 @@ const CommandComment = new GraphQLObjectType({
     deletedAt: {
       type: GraphQLString
     }
-  }),
-  interfaces: () => [CommentInterface]
+  })
 });
 
 export default CommandComment;

@@ -16,8 +16,6 @@ import GuideStar from "./guideStar";
 import CommandStar from "./commandStar";
 import Var from "./var";
 
-import db from "../../../../db/models";
-
 const User = new GraphQLObjectType({
   name: "User",
   fields: {

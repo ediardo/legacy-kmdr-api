@@ -3,17 +3,16 @@ import path from "path";
 import session from "express-session";
 import webpackMiddleware from "webpack-dev-middleware";
 import webpack from "webpack";
-import webpackConfig from "../../webpack.config.js";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
 import GithubStrategy from "passport-github2";
 import FacebookStrategy from "passport-facebook";
-import { graphiqlExpress } from "graphql-server-express";
+//import { graphiqlExpress } from "graphql-server-express";
 import graphqlHTTP from "express-graphql";
 import cors from "cors";
 import config from "./db/config/config.json";
-import schema from "./graphql/schema/";
+import graphqlSchema from "./api/graphql/";
 import db from "./db/models";
 
 const app = express();
@@ -35,6 +34,7 @@ var corsOptions = {
   credentials: true
 };
 
+/*
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.resolve(__dirname, "..", "build")));
@@ -130,21 +130,16 @@ passport.deserializeUser((user, done) => {
     }
   });
 });
-
+*/
 app.use(
   "/graphql",
   bodyParser.json(),
   graphqlHTTP((req, res) => ({
-    schema
+    schema: graphqlSchema,
+    graphiql: true
   }))
 );
-
-app.use(
-  "/graphiql",
-  graphiqlExpress({
-    endpointURL: "/graphql"
-  })
-);
+/*
 app.get("/logout", (req, res) => {
   req.logout();
   res.redirect("http://kommandr.com:5000");
@@ -172,7 +167,7 @@ app.get(
     res.redirect("http://localhost:5000/#");
   }
 );
-
-app.use(webpackMiddleware(webpack(webpackConfig)));
-
-export default app;
+*/
+app.listen(5001, () => {
+  console.log("Listening on port 5001");
+});

@@ -12,7 +12,7 @@ import Command from "./command";
 import User from "./user";
 import Var from "./var";
 
-import db from "../../../../db/models";
+//import db from "../../../../db/models";
 
 const Guide = new GraphQLObjectType({
   name: "Guide",
@@ -71,7 +71,8 @@ const Guide = new GraphQLObjectType({
     commands: {
       type: new GraphQLList(Command),
       resolve: guide => guide.Comment
-    },
+    }
+    /*
     vars: {
       type: new GraphQLList(Var),
       resolve: guide => {
@@ -96,6 +97,7 @@ const Guide = new GraphQLObjectType({
         });
       }
     }
+    */
   })
 });
 

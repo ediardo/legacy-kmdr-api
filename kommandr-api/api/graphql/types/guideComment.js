@@ -8,7 +8,6 @@ import {
 
 import User from "./user";
 import Guide from "./guide";
-import CommentInterface from "../interfaces/comment";
 
 const GuideComment = new GraphQLObjectType({
   name: "GuideComment",
@@ -50,8 +49,7 @@ const GuideComment = new GraphQLObjectType({
     deletedAt: {
       type: GraphQLString
     }
-  }),
-  interfaces: () => [CommentInterface]
+  })
 });
 
 export default GuideComment;

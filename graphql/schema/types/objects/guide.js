@@ -8,6 +8,7 @@ import {
   GraphQLList
 } from "graphql";
 
+import Command from "./command";
 import User from "./user";
 import Var from "./var";
 
@@ -66,6 +67,10 @@ const Guide = new GraphQLObjectType({
     },
     deletedAt: {
       type: GraphQLString
+    },
+    commands: {
+      type: new GraphQLList(Command),
+      resolve: guide => guide.Comment
     },
     vars: {
       type: new GraphQLList(Var),

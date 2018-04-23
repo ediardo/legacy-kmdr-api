@@ -29,7 +29,10 @@ const RootQueryType = new GraphQLObjectType({
     },
     commands: {
       type: new GraphQLList(Command),
-      resolve: () => db.Command.findAll()
+      resolve: () =>
+        db.Command.findAll({
+          include: [{ model: db.Program }]
+        })
     },
     guide: {
       type: new GraphQLNonNull(Guide),
@@ -42,7 +45,10 @@ const RootQueryType = new GraphQLObjectType({
     },
     guides: {
       type: new GraphQLList(Guide),
-      resolve: () => db.Guide.findAll()
+      resolve: () =>
+        db.Guide.findAll({
+          include: [{ model: db.Command }]
+        })
     },
     program: {
       type: Program,

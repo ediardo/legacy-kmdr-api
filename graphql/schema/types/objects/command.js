@@ -11,6 +11,7 @@ import User from "./user";
 import Var from "./var";
 import CommandComment from "./commandComment";
 import Fork from "./command";
+import Program from "./program";
 
 import db from "../../../../db/models";
 
@@ -89,6 +90,10 @@ const Command = new GraphQLObjectType({
     forks: {
       type: new GraphQLList(Fork),
       resolve: command => command.getForks()
+    },
+    program: {
+      type: Program,
+      resolve: command => command.Program
     },
     vars: {
       type: new GraphQLList(Var),

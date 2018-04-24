@@ -4,7 +4,8 @@ import {
   GraphQLBoolean,
   GraphQLString,
   GraphQLObjectType,
-  GraphQLList
+  GraphQLList,
+  GraphQLEnumType
 } from "graphql";
 
 import Activity from "./activity";
@@ -15,6 +16,7 @@ import Command from "./command";
 import GuideStar from "./guideStar";
 import CommandStar from "./commandStar";
 import Var from "./var";
+import UserStatusEnum from "../enums/userStatus";
 
 const User = new GraphQLObjectType({
   name: "User",
@@ -38,7 +40,7 @@ const User = new GraphQLObjectType({
       type: GraphQLString
     },
     status: {
-      type: GraphQLInt
+      type: new GraphQLEnumType(UserStatusEnum)
     },
     lastLogin: {
       type: GraphQLString

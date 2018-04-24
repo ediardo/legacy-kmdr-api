@@ -1,3 +1,3 @@
-import platforms from "./platforms";
+import platform from "./platform";
 
-export { platforms };
+export { platform };

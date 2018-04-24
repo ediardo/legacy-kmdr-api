@@ -4,6 +4,8 @@ import User from "../../types/user";
 import { GraphQLList } from "graphql";
 
 export default {
+  name: "Me",
+  description: "Get current logged in user",
   type: new GraphQLList(User),
-  resolve: () => db.User.findAll()
+  resolve: (root, args, context) => db.User.findOne()
 };

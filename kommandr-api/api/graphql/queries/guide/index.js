@@ -1,3 +1,4 @@
-import programs from "./programs";
+import guides from "./guides";
+import guide from "./guide";
 
-export { programs };
+export { guides, guide };

@@ -1,5 +1,5 @@
 export default {
-  name: "UserStatusEnum",
+  name: "CommentStatusEnum",
   values: {
     deleted: {
       value: -1
@@ -10,7 +10,7 @@ export default {
     active: {
       value: 1
     },
-    suspended: {
+    reported: {
       value: 2
     }
   }

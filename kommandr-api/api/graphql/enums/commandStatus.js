@@ -1,6 +1,9 @@
 export default {
-  name: "UserStatusEnum",
+  name: "CommandStatusEnum",
   values: {
+    deleted: {
+      value: -1
+    },
     inactive: {
       value: 0
     },
@@ -9,9 +12,6 @@ export default {
     },
     suspended: {
       value: 2
-    },
-    deleted: {
-      value: 3
     }
   }
 };

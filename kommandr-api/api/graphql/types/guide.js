@@ -5,13 +5,15 @@ import {
   GraphQLString,
   GraphQLNonNull,
   GraphQLBoolean,
-  GraphQLList
+  GraphQLList,
+  GraphQLEnumType
 } from "graphql";
 
 import Command from "./command";
 import User from "./user";
 import Var from "./var";
 
+import { GuideStatus } from "../enums";
 //import db from "../../../../db/models";
 
 const Guide = new GraphQLObjectType({
@@ -41,7 +43,7 @@ const Guide = new GraphQLObjectType({
       type: GraphQLBoolean
     },
     status: {
-      type: GraphQLInt
+      type: new GraphQLEnumType(GuideStatus)
     },
     author: {
       type: User,

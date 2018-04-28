@@ -4,7 +4,8 @@ import {
   GraphQLList,
   GraphQLNonNull,
   GraphQLString,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLEnumType
 } from "graphql";
 
 import User from "./user";
@@ -12,6 +13,7 @@ import Var from "./var";
 import CommandComment from "./commandComment";
 import Fork from "./command";
 import Program from "./program";
+import { CommandStatus } from "../enums";
 
 //import db from "../../../../db/models";
 
@@ -75,6 +77,9 @@ const Command = new GraphQLObjectType({
     createdAt: {
       type: GraphQLString,
       description: "Timestamp"
+    },
+    status: {
+      type: new GraphQLEnumType(CommandStatus)
     },
     updatedAt: {
       type: GraphQLString,

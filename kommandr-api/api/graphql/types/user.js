@@ -16,7 +16,7 @@ import Command from "./command";
 import GuideStar from "./guideStar";
 import CommandStar from "./commandStar";
 import Var from "./var";
-import UserStatusEnum from "../enums/userStatus";
+import { UserStatus } from "../enums";
 
 const User = new GraphQLObjectType({
   name: "User",
@@ -40,7 +40,7 @@ const User = new GraphQLObjectType({
       type: GraphQLString
     },
     status: {
-      type: new GraphQLEnumType(UserStatusEnum)
+      type: new GraphQLEnumType(UserStatus)
     },
     lastLogin: {
       type: GraphQLString

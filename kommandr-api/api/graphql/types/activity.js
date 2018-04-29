@@ -4,10 +4,16 @@ import {
   GraphQLID,
   GraphQLInt,
   GraphQLString,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLEnumType
 } from "graphql";
 
-const activityType = new GraphQLObjectType({
+import {
+  EntityTypes as EntityTypesEnum,
+  EntityActions as EntityActionsEnum
+} from "../enums";
+
+const Activity = new GraphQLObjectType({
   name: "Activity",
   fields: () => ({
     id: {
@@ -22,13 +28,15 @@ const activityType = new GraphQLObjectType({
       type: GraphQLInt,
       description: "ID of the entity affected by this activity"
     },
-    entityTypeId: {
-      type: GraphQLInt,
-      description: "Type ID of the entity"
+    entityType: {
+      type: new GraphQLEnumType(EntityTypesEnum),
+      description: "Type ID of the entity",
+      resolve: activity => activity.entityTypeId
     },
-    entityActionId: {
-      type: GraphQLInt,
-      description: "ID of the action"
+    entityAction: {
+      type: new GraphQLEnumType(EntityActionsEnum),
+      description: "ID of the action",
+      resolve: activity => activity.entityActionId
     },
     isPrivate: {
       type: GraphQLBoolean,
@@ -43,4 +51,4 @@ const activityType = new GraphQLObjectType({
   })
 });
 
-export default activityType;
+export default Activity;

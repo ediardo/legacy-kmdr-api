@@ -3,6 +3,7 @@ import { program, programs } from "./program";
 import { guide, guides } from "./guide";
 import { command, commands } from "./command";
 import { platform, platforms } from "./platform";
+import { activities } from "./activity";
 
 export default {
   me,
@@ -13,5 +14,6 @@ export default {
   guide,
   guides,
   command,
-  commands
+  commands,
+  activities
 };

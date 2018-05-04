@@ -1,9 +1,7 @@
-Kommandr.com
+kommandr-api
 ============
 
-Utilize a centralized command center at Kommandr.com and discover, learn, save, and share commands. Watch demo video [here](https://www.youtube.com/watch?v=TWnx7LMQmI0)
-
-This project is under development.
+The API backend service.
 ## Installation
 
 ### Clone the project
@@ -13,16 +11,16 @@ $ git clone git@github.com:kommandr/kommandr.git
  
 ### Install dependencies
 ```shell
-$ cd kommandr
+$ cd kommandr-api
 $ npm install --save
 ```
 
 ## Running kommandr.com locally
 You need two terminal window/tabs opened #1 for backend and #2 for frontend. 
 
-### Backend (terminal #1)
+### Backend 
 ```shell
-$ cd kommandr
+$ cd kommandr-api
 ```
 #### Create Database
 ```shell
@@ -39,15 +37,5 @@ $ npm start
 ```
 
 ### View GraphiQL (Optional)
-Go to http://localhost:5001/graphiql
-
-### Frontend (terminal #2)
-```shell
-$ cd kommandr
-```
-
-#### Starting webback dev server.
-```shell
-$ node scripts/start.js
-```
+Go to http://localhost:5001/graphql
 

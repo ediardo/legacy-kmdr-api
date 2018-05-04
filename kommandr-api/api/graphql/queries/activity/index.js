@@ -1,3 +1,3 @@
-import programs from "./programs";
+import activities from "./activities";
 
-export { programs };
+export { activities };

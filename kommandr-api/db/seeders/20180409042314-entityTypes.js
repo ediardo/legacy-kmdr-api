@@ -13,22 +13,30 @@ module.exports = {
       },
       {
         id: 3,
-        name: "comment"
+        name: "guideComment"
       },
       {
         id: 4,
-        name: "star"
+        name: "commandComment"
       },
       {
         id: 5,
-        name: "report"
+        name: "guideStar"
       },
       {
         id: 6,
-        name: "program"
+        name: "commandStar"
       },
       {
         id: 7,
+        name: "report"
+      },
+      {
+        id: 8,
+        name: "program"
+      },
+      {
+        id: 9,
         name: "var"
       }
     ]);

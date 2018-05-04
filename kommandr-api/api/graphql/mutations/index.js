@@ -3,23 +3,23 @@ import {
   GraphQLID,
   GraphQLNonNull,
   GraphQLString,
-  GraphQLBoolean,
-} from 'graphql';
-import bcrypt from 'bcrypt';
-import crypto from 'crypto';
+  GraphQLBoolean
+} from "graphql";
+import bcrypt from "bcrypt";
+import crypto from "crypto";
 
-import db from '../../models';
-import kommandrType from './types/kommandr';
-import collectionType from './types/collection';
-import userType from './types/user';
-import commentType from './types/comment';
-import reportType from './types/report';
-import tokenType from './types/token';
+import db from "../../models";
+import kommandrType from "./types/kommandr";
+import collectionType from "./types/collection";
+import userType from "./types/user";
+import commentType from "./types/comment";
+import reportType from "./types/report";
+import tokenType from "./types/token";
 //import teamType from './types/team';
-const tokenHash = (token) => bcrypt.hashSync(token, 1);
+const tokenHash = token => bcrypt.hashSync(token, 1);
 
 const mutation = new GraphQLObjectType({
-  name: 'Mutation',
+  name: "Mutation",
   fields: {
     addKommandr: {
       type: kommandrType,
@@ -53,38 +53,42 @@ const mutation = new GraphQLObjectType({
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLID),
-          description: 'Kommandr ID'
+          description: "Kommandr ID"
         },
         title: {
           type: new GraphQLNonNull(GraphQLString),
-          description: 'Title',
+          description: "Title"
         },
         cli: {
           type: new GraphQLNonNull(GraphQLString),
-          description: 'CLI Content',
+          description: "CLI Content"
         },
         description: {
-          type: GraphQLString,
-        },
+          type: GraphQLString
+        }
       },
       resolve: (root, { id, title, cli, description }, ctx) => {
         if (!ctx.user) return null;
-        return db.Kommandr.update({ 
-          title,
-          cli,
-          description
-        },
-        {
-          where: { 
-            hashId: id,
-            userId: ctx.user.id
+        return db.Kommandr.update(
+          {
+            title,
+            cli,
+            description
+          },
+          {
+            where: {
+              hashId: id,
+              userId: ctx.user.id
+            }
           }
-        }).then(affectedRows => {
+        ).then(affectedRows => {
           if (affectedRows > 0) {
             return db.Kommandr.findOne({
-              include: [{
-                model: db.User,
-              }],
+              include: [
+                {
+                  model: db.User
+                }
+              ],
               where: { hashId: id, userId: ctx.user.id }
             });
           } else {
@@ -98,22 +102,25 @@ const mutation = new GraphQLObjectType({
       type: kommandrType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLID),
-        },
+          type: new GraphQLNonNull(GraphQLID)
+        }
       },
       resolve: (root, { id }, ctx) => {
         if (!ctx.user) return null;
         return db.Kommandr.findOne({
-          where: { hashId: id },
+          where: { hashId: id }
         }).then(kommandr => {
           const { id, title, cli, description } = kommandr;
-          return db.Kommandr.create({
-            title,
-            cli,
-            description,
-            forkFrom: id,
-            userId: ctx.user.id,
-          }, { isForked: true });
+          return db.Kommandr.create(
+            {
+              title,
+              cli,
+              description,
+              forkFrom: id,
+              userId: ctx.user.id
+            },
+            { isForked: true }
+          );
         });
       }
     },
@@ -122,8 +129,8 @@ const mutation = new GraphQLObjectType({
       type: kommandrType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLID),
-        },
+          type: new GraphQLNonNull(GraphQLID)
+        }
       },
       resolve: (root, { id }, ctx) => {
         if (!ctx.user) return null;
@@ -135,10 +142,10 @@ const mutation = new GraphQLObjectType({
         }).then(kommandr => {
           return db.Kommandr.destroy({
             where: {
-              id: kommandr.id,
+              id: kommandr.id
             }
           }).then(affectedRows => {
-            if (affectedRows > 0) return kommandr
+            if (affectedRows > 0) return kommandr;
           });
         });
       }
@@ -148,24 +155,25 @@ const mutation = new GraphQLObjectType({
       type: reportType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLID),
+          type: new GraphQLNonNull(GraphQLID)
         },
         reason: {
-          type: new GraphQLNonNull(GraphQLString),
-        },
+          type: new GraphQLNonNull(GraphQLString)
+        }
       },
       resolve: (root, { id, reason }, ctx) => {
         if (!ctx.user) return null;
-        if (reason !== 'spam' || reason !== 'fake' || reason !== 'dangerous') reason = 'spam';
+        if (reason !== "spam" || reason !== "fake" || reason !== "dangerous")
+          reason = "spam";
         return db.Kommandr.findOne({
-          where: { 
+          where: {
             hashId: id
           }
         }).then(kommandr => {
           return db.Report.create({
             userId: ctx.user.id,
             kommandrId: kommandr.id,
-            reason,
+            reason
           });
         });
       }
@@ -176,29 +184,29 @@ const mutation = new GraphQLObjectType({
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLID)
-        },
+        }
       },
       resolve: (root, { id }, ctx) => {
         if (!ctx.user) return null;
         return db.Kommandr.findOne({
-          where: { hashId: id },
+          where: { hashId: id }
         }).then(kommandr => {
-          return db.Star.findOrCreate({ 
+          return db.Star.findOrCreate({
             where: {
               kommandrId: kommandr.id,
               userId: ctx.user.id
             },
             defaults: {
               userId: ctx.user.id,
-              kommandrId: kommandr.id,
+              kommandrId: kommandr.id
             }
           }).spread((star, created) => {
-            return kommandr;    
-          });  
+            return kommandr;
+          });
         });
       }
     },
-/*
+    /*
     unstarKommandr: {
       type: kommandrType,
       args: {
@@ -239,17 +247,17 @@ const mutation = new GraphQLObjectType({
         },
         comment: {
           type: new GraphQLNonNull(GraphQLString)
-        },
+        }
       },
       resolve: (root, { kommandrId, comment }, ctx) => {
         if (!ctx.user) return null;
         return db.Kommandr.findOne({
           where: { hashId: kommandrId }
         }).then(kommandr => {
-          return db.Comment.create({ 
-            kommandrId: kommandr.id, 
+          return db.Comment.create({
+            kommandrId: kommandr.id,
             userId: ctx.user.id,
-            comment 
+            comment
           }).then(comment => {
             console.log(comment);
           });
@@ -262,139 +270,44 @@ const mutation = new GraphQLObjectType({
       args: {
         id: {
           type: new GraphQLNonNull(GraphQLID)
-        },
+        }
       },
       resolve: (root, { id }, ctx) => {
         if (!ctx.user) return null;
         return db.Comment.findOne({
           where: { id, userId: ctx.user.id }
         }).then(comment => {
-          return comment.destroy().then(affectedRows => (affectedRows === 1) ? ({ id }) : null);
+          return comment
+            .destroy()
+            .then(affectedRows => (affectedRows === 1 ? { id } : null));
         });
       }
     },
 
-    addUser: {
-      type: userType,
-      args: {
-        username: {
-          type: new GraphQLNonNull(GraphQLString),
-        },
-        email: {
-          type: new GraphQLNonNull(GraphQLString),
-        },
-        password: {
-          type: new GraphQLNonNull(GraphQLString),
-        },
-      },
-      resolve(root, { username, email, password }) {
-        return db.User.create({ email, password });
-      }
-    },
-
-    updateUser: {
-      type: userType,
-      args: {
-        email: {
-          type: GraphQLString,
-        },
-        username: {
-          type: GraphQLString
-        },
-        password: {
-          type: GraphQLString
-        },
-        name: {
-          type: GraphQLString,
-        },
-        website: {
-          type: GraphQLString,
-        },
-        enableLogin: {
-          type: GraphQLBoolean,
-        },
-      },
-      resolve: (root, { email, username, password, name, website }, ctx) => {
-        if (!ctx.user) return null;
-        let userFields = {};
-        if (username) {
-          userFields = {
-            ...userFields,
-            username,
-            isUsernameSet: true,
-          };
-        }
-        if (password) {
-          userFields = { 
-            ...userFields, 
-            password,
-            isPasswordSet: true,
-          };
-        }
-        if (name) {
-          userFields = { ...userFields, name };
-        }
-        if (website) {
-          userFields = { ...userFields, website };
-        }
-        // NOTE (ediardo):
-        // must create a separate mutation to turn on/off notification and one-time off modals
-        userFields = { 
-          ...userFields,
-          hasSeenWelcome: 1,
-        };
-
-        db.User.findOne({
-          where: { id: ctx.user.id },
-        }).then(user => {
-          return db.User.update(
-            userFields, 
-            {
-              where: { id: ctx.user.id } 
-            }
-          ).then(affectedRows => (affectedRows === 1) ? db.User.findById(ctx.user.id) : user );
-        });
-      }
-    },
-
-    deleteUser: {
-      type: userType,
-      args: {
-        id: { 
-          description: 'User ID',
-          type: new GraphQLNonNull(GraphQLID),
-        },
-      },
-      resolve: (root, { id }, ctx) => {
-        if (!ctx.user || ctx.user.id !== id) return null;
-        db.User.findOne({
-          where: { id }
-        }).then(user => {
-          user.destroy().then(affectedRows => (affectedRows === 1) ? ({ id }) : null);
-        });
-      }
-    },
-    
     addCollection: {
       type: collectionType,
       args: {
         name: {
-          type: new GraphQLNonNull(GraphQLString),
+          type: new GraphQLNonNull(GraphQLString)
         },
         description: {
-          type: GraphQLString,
+          type: GraphQLString
         },
         matchRegex: {
-          type: GraphQLString,
+          type: GraphQLString
         },
         matchAllTime: {
           type: GraphQLBoolean
         },
         isEnabled: {
-          type: GraphQLBoolean,
-        },
+          type: GraphQLBoolean
+        }
       },
-      resolve: (root, { name, description, matchRegex, matchAllTime, isEnabled }, ctx) => {
+      resolve: (
+        root,
+        { name, description, matchRegex, matchAllTime, isEnabled },
+        ctx
+      ) => {
         if (!ctx.user) return null;
         return db.Collection.create({
           name,
@@ -402,34 +315,45 @@ const mutation = new GraphQLObjectType({
           matchRegex,
           matchAllTime,
           isEnabled,
-          userId: ctx.user.id,
+          userId: ctx.user.id
         });
       }
     },
-    
+
     updateCollection: {
       type: collectionType,
       args: {
-        id: { 
-          type: new GraphQLNonNull(GraphQLID),
+        id: {
+          type: new GraphQLNonNull(GraphQLID)
         },
         name: {
-          type: new GraphQLNonNull(GraphQLString),
+          type: new GraphQLNonNull(GraphQLString)
         },
         description: {
-          type: GraphQLString,
+          type: GraphQLString
         },
         matchRegex: {
-          type: GraphQLString,
+          type: GraphQLString
         },
         matchAllTime: {
-          type: GraphQLBoolean,
+          type: GraphQLBoolean
         },
         isEnabled: {
-          type: GraphQLBoolean,
+          type: GraphQLBoolean
         }
       },
-      resolve: (root, { id, name, description, matchRegex, matchAllTime = true, isEnabled = true }, ctx) => {
+      resolve: (
+        root,
+        {
+          id,
+          name,
+          description,
+          matchRegex,
+          matchAllTime = true,
+          isEnabled = true
+        },
+        ctx
+      ) => {
         if (!ctx.user) return null;
         var updateFields = {};
         if (name) {
@@ -441,7 +365,7 @@ const mutation = new GraphQLObjectType({
         if (matchRegex) {
           updateFields = { ...updateFields, matchRegex };
         }
-        if (matchAllTime !== undefined ) {
+        if (matchAllTime !== undefined) {
           updateFields = { ...updateFields, matchAllTime };
         }
         if (isEnabled !== undefined) {
@@ -449,38 +373,39 @@ const mutation = new GraphQLObjectType({
         }
 
         return db.Collection.findOne({
-          where: { id, userId: ctx.user.id },
+          where: { id, userId: ctx.user.id }
         }).then(collection => {
-          return db.Collection.update(
-            updateFields,
-            {
-              where: { id }
-            }
-          ).then(affectedRows => {
+          return db.Collection.update(updateFields, {
+            where: { id }
+          }).then(affectedRows => {
             return db.Collection.findOne({
-              include: [{
-                model: db.User,
-                where: { id: ctx.user.id }
-              }],
+              include: [
+                {
+                  model: db.User,
+                  where: { id: ctx.user.id }
+                }
+              ],
               where: { id }
-            })
+            });
           });
         });
       }
     },
-    
+
     deleteCollection: {
       type: collectionType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLID),
-        },
+          type: new GraphQLNonNull(GraphQLID)
+        }
       },
       resolve: (root, { id }, ctx) => {
         db.Collection.findOne({
           where: { id, userId: ctx.user.id }
         }).then(collection => {
-          return collection.destroy().then(affectedRows => (affectedRows === 1) ? ({ id }) : null);
+          return collection
+            .destroy()
+            .then(affectedRows => (affectedRows === 1 ? { id } : null));
         });
       }
     },
@@ -489,19 +414,20 @@ const mutation = new GraphQLObjectType({
       type: tokenType,
       args: {
         name: {
-          type: GraphQLString,
-        },
+          type: GraphQLString
+        }
       },
       resolve: (root, { name }, ctx) => {
         if (!ctx.user) return null;
-        var tokenHash = crypto.createHash('sha256')
+        var tokenHash = crypto
+          .createHash("sha256")
           .update(Date.now().toString())
-          .digest('hex');
+          .digest("hex");
         return db.Token.create({
           name,
           userId: ctx.user.id,
           tokenHash,
-          tokenHint: tokenHash.substr(-4),
+          tokenHint: tokenHash.substr(-4)
         }).then(token => {
           token.tokenHash = tokenHash;
           return token;

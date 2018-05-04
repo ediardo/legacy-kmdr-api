@@ -1,3 +1,4 @@
-import programs from "./programs";
+import command from "./command";
+import commands from "./commands";
 
-export { programs };
+export { command, commands };

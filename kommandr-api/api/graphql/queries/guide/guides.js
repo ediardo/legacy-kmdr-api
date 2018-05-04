@@ -4,7 +4,7 @@ import Guide from "../../types/guide";
 import { GraphQLList } from "graphql";
 
 export default {
-  name: "guides",
+  name: "Guides",
   description: "List of guides",
   type: new GraphQLList(Guide),
   resolve: () =>

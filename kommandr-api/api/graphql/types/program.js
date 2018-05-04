@@ -4,11 +4,14 @@ import {
   GraphQLString,
   GraphQLNonNull,
   GraphQLList,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLEnumType
 } from "graphql";
 
 import Command from "./command";
 import Platform from "./platform";
+
+import { ProgramStatus } from "../enums";
 
 const Program = new GraphQLObjectType({
   name: "Program",
@@ -30,6 +33,9 @@ const Program = new GraphQLObjectType({
     },
     shortDescription: {
       type: GraphQLString
+    },
+    status: {
+      type: new GraphQLEnumType(ProgramStatus)
     },
     platform: {
       type: Platform,

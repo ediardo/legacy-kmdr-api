@@ -4,11 +4,13 @@ import {
   GraphQLString,
   GraphQLNonNull,
   GraphQLBoolean,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLEnumType
 } from "graphql";
 
 import User from "./user";
 import Command from "./command";
+import { CommentStatus } from "../enums";
 
 const CommandComment = new GraphQLObjectType({
   name: "CommandComment",
@@ -42,6 +44,9 @@ const CommandComment = new GraphQLObjectType({
     posEnd: {
       type: GraphQLInt,
       description: "End position of partial comment"
+    },
+    status: {
+      type: new GraphQLEnumType(CommentStatus)
     },
     command: {
       type: Command,

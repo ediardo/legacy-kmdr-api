@@ -1,17 +1,20 @@
-import { ManPage } from "../../types";
-
+import { ManPage as ManPageType } from "../../types";
 import { GraphQLID, GraphQLNonNull } from "graphql";
 
 export default {
   name: "Man Page",
   description: "Man Pages",
-  type: ManPage,
-  resolve: (root, { id }, { mongo }) => {
-    const ManPage = mongo.model("ManPage");
-    /*
-    context.mongo.model("ManPage").find({}, ["name"], (a, e) => {
-      console.log(a, e);
-    });
-    */
+  type: ManPageType,
+  resolve: (root, { id }, { dbMongo }) => {
+    const manPage = dbMongo.model("ManPage");
+    return manPage.findOne({ name: "mysqldump" }).then(
+      page => {
+        console.log(page);
+        return page;
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 };

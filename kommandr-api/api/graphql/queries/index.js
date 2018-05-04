@@ -4,6 +4,7 @@ import { guide, guides } from "./guide";
 import { command, commands } from "./command";
 import { platform, platforms } from "./platform";
 import { activities } from "./activity";
+import { manPage, manPages } from "./manPage";
 
 export default {
   me,
@@ -15,5 +16,7 @@ export default {
   guides,
   command,
   commands,
-  activities
+  activities,
+  manPages,
+  manPage
 };

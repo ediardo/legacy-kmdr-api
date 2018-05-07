@@ -1,12 +1,15 @@
+![Logo](/logo.png)
+
 kommandr-api
 ============
 
-The API backend service.
+The API backend service for kommandr.com.
+
 ## Installation
 
 ### Clone the project
 ```shell
-$ git clone git@github.com:kommandr/kommandr.git
+$ git clone git@github.com:kommandr/kommandr-api.git
  ```
  
 ### Install dependencies
@@ -16,9 +19,7 @@ $ npm install --save
 ```
 
 ## Running kommandr.com locally
-You need two terminal window/tabs opened #1 for backend and #2 for frontend. 
 
-### Backend 
 ```shell
 $ cd kommandr-api
 ```

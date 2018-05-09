@@ -1,7 +1,6 @@
 ![Logo](/logo.png)
 
-kommandr-api
-============
+# kommandr-api
 
 The API backend service for kommandr.com.
 

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mariadb:
+    image: mariadb
+    container_name: kommandr-api_mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: kommandr
+      MYSQL_DATABASE: kommandr
+      MYSQL_USER: kommandr
+      MYSQL_PASSWORD: k0mm4ndr
+  mongodb:
+    image: mongo
+    container_name: kommandr-api_mongodb
+    ports: 
+      - "27017:27017"
+  

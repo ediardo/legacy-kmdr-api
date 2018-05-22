@@ -1,5 +1,4 @@
 config/config.json
 db.development.sqlite
 node_modules
-misc/explainshell
-misc/manPages
+docker/mongodb/dumps

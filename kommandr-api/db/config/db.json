@@ -1,6 +1,17 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "db.development.sqlite"
+    "dialect": "mysql",
+    "username": "kommandr",
+    "password": "k0mm4ndr",
+    "database": "kommandr",
+    "host": "192.168.99.100",
+    "port": 3306,
+    "options": {
+      "charset": "utf8",
+      "collate": "utf8_general_ci"
+    }
+  },
+  "production": {
+    
   }
 }

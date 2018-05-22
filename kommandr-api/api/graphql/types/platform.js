@@ -14,8 +14,6 @@ const Platform = new GraphQLObjectType({
     name: {
       type: GraphQLString,
       resolve: platform => {
-        console.log("asdasd");
-        console.log(platform);
         return platform.name;
       }
     },

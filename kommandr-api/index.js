@@ -14,7 +14,7 @@ import cors from "cors";
 import config from "./db/config/config.json";
 import graphqlSchema from "./api/graphql/";
 import db from "./db/models";
-import dbMongo from "./db_mongodb";
+//import dbMongo from "./db_mongodb";
 
 const app = express();
 app.use(cookieParser());

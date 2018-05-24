@@ -8,7 +8,6 @@ var env = process.env.NODE_ENV || "development";
 var config = require("../config/db.json")[env];
 var db = {};
 
-console.log(config);
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
@@ -16,7 +15,14 @@ if (config.use_env_variable) {
     config.database,
     config.username,
     config.password,
-    config.options
+    {
+      host: config.host,
+      dialect: config.dialect,
+      port: config.port,
+      dialectOptions: {
+        charset: "utf8mb4"
+      }
+    }
   );
 }
 
@@ -39,6 +45,5 @@ Object.keys(db).forEach(function(modelName) {
 });
 
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 module.exports = db;

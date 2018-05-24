@@ -1,4 +1,9 @@
-import { GraphQLID, GraphQLNonNull } from "graphql";
+import {
+  GraphQLID,
+  GraphQLNonNull,
+  GraphQLSchema,
+  GraphQLString
+} from "graphql";
 import Program from "../../types/program";
 
 import db from "../../../../db/models";
@@ -8,9 +13,9 @@ export default {
   description: "Get program by ID",
   type: Program,
   args: {
-    id: {
-      type: new GraphQLNonNull(GraphQLID)
+    name: {
+      type: GraphQLString
     }
   },
-  resolve: (root, { id }, context) => db.Program.findOne({ where: { id } })
+  resolve: (root, { name }, context) => db.Program.findOne({ where: { name } })
 };

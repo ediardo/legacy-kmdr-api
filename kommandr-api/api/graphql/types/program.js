@@ -12,6 +12,7 @@ import Command from "./command";
 import Platform from "./platform";
 
 import { ProgramStatus } from "../enums";
+import { ManPage } from ".";
 
 const Program = new GraphQLObjectType({
   name: "Program",
@@ -36,6 +37,20 @@ const Program = new GraphQLObjectType({
     },
     status: {
       type: new GraphQLEnumType(ProgramStatus)
+    },
+    manPage: {
+      type: ManPage,
+      resolve: (program, args, { dbMongo }) => {
+        const manPage = dbMongo.model("ManPage");
+        return manPage.findOne({ name: program.name }).then(
+          page => {
+            return page;
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      }
     },
     platform: {
       type: Platform,

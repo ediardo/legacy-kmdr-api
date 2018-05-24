@@ -15,4 +15,3 @@ services:
     container_name: kommandr-api_mongodb
     ports: 
       - "27017:27017"
-  

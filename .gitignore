@@ -1,4 +1,4 @@
 config/config.json
 db.development.sqlite
 node_modules
-docker/mongodb/dumps
+dumps/explainshell.tar.gz

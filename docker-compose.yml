@@ -15,3 +15,16 @@ services:
     container_name: kommandr-api_mongodb
     ports: 
       - "27017:27017"
+  api:
+    build: .
+    container_name: kommandr-api_graphql
+    depends_on:
+      - mariadb
+      - mongodb
+    ports: 
+      - "5001:5001"
+    working_dir: /home/node/app
+    volumes:
+      - .:/home/node/app
+    command: npm run docker-dev
+

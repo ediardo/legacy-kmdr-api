@@ -40,8 +40,8 @@ const Program = new GraphQLObjectType({
     },
     manPage: {
       type: ManPage,
-      resolve: (program, args, { dbMongo }) => {
-        const manPage = dbMongo.model("ManPage");
+      resolve: (program, args, { mongo }) => {
+        const manPage = mongo.model("ManPage");
         return manPage.findOne({ name: program.name }).then(
           page => {
             return page;

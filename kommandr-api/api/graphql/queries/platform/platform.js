@@ -1,7 +1,5 @@
-import db from "../../../../db/models";
-import Platform from "../../types/platform";
-
 import { GraphQLList, GraphQLID, GraphQLNonNull } from "graphql";
+import { Platform } from "../../types";
 
 export default {
   name: "Guide",

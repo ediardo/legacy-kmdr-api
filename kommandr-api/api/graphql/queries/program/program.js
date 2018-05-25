@@ -6,8 +6,6 @@ import {
 } from "graphql";
 import Program from "../../types/program";
 
-import db from "../../../../db/models";
-
 export default {
   name: "program",
   description: "Get program by ID",
@@ -17,5 +15,5 @@ export default {
       type: GraphQLString
     }
   },
-  resolve: (root, { name }, context) => db.Program.findOne({ where: { name } })
+  resolve: (root, { name }, { sql }) => sql.Program.findOne({ where: { name } })
 };

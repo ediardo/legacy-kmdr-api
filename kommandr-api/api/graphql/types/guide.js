@@ -14,7 +14,6 @@ import User from "./user";
 import Var from "./var";
 
 import { GuideStatus } from "../enums";
-//import db from "../../../../db/models";
 
 const Guide = new GraphQLObjectType({
   name: "Guide",

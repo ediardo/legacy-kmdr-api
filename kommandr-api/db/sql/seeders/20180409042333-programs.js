@@ -1,4 +1,4 @@
-const programSamples = require("../config/programs.example");
+const programSamples = require("../config/programs");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

@@ -3,3 +3,5 @@ db.development.sqlite
 node_modules
 dumps/explainshell.tar.gz
 *.bak
+kommandr-api/db/sql/config/db.json
+kommandr-api/db/sql/config/config.json

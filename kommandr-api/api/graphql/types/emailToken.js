@@ -6,7 +6,6 @@ import {
 } from "graphql";
 
 import userType from "./user";
-import db from "../../../models";
 
 const EmailToken = new GraphQLObjectType({
   name: "EmailToken",

@@ -1,7 +1,7 @@
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import { reservedUsernames } from "../config/reservedUsernames";
 
-const hashPassword = password => bcrypt.hashSync(password, 1);
+// const hashPassword = password => bcrypt.hashSync(password, 1);
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define(
@@ -76,15 +76,12 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   User.hook("beforeBulkUpdate", user => {
-    const { username, name, password } = user.attributes;
+    const { username, name } = user.attributes;
     if (username) {
       user.attributes.username = username.trim().toLowerCase();
     }
     if (name) {
       user.attributes.name = name.trim();
-    }
-    if (password) {
-      user.attributes.password = hashPassword(password);
     }
     return user;
   });

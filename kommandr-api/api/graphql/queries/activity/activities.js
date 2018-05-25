@@ -1,6 +1,5 @@
-import db from "../../../../db/models";
-import { Activity } from "../../types";
 import { GraphQLList, GraphQLNonNull, GraphQLID } from "graphql";
+import { Activity } from "../../types";
 
 export default {
   name: "Activity",
@@ -11,11 +10,11 @@ export default {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: (parent, { userId }, context) =>
-    db.Activity.findOne({
+  resolve: (parent, { userId }, { sql }) =>
+    sql.Activity.findOne({
       include: [
         {
-          model: db.User,
+          model: sql.User,
           where: { id: userId }
         }
       ]

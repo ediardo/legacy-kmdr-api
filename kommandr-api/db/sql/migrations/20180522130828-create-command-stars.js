@@ -24,7 +24,7 @@ module.exports = {
         }
       },
       createdAt: {
-        type: DataTypes.INTEGER
+        type: DataTypes.DATE
       }
     });
   },

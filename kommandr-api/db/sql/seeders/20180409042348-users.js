@@ -11,13 +11,13 @@ module.exports = {
           websiteUrl: "https://example.com/website",
           twitterHandle: "@kmdr_sh",
           status: 1,
-          lastLogin: Date(),
+          lastLogin: new Date(),
           lastLoginIpAddress: "127.0.0.1",
           githubId: "1195596",
           githubHandle: "ediardo",
           avatarUrl: "https://avatars1.githubusercontent.com/u/9919?s=200&v=4",
-          createdAt: Date(),
-          updatedAt: Date()
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       { skip: ["username", "password"] }

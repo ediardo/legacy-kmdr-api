@@ -1,7 +1,5 @@
-import db from "../../../../db/models";
-import User from "../../types/user";
-
 import { GraphQLList, GraphQLString, GraphQLNonNull } from "graphql";
+import User from "../../types/user";
 
 export default {
   name: "User",
@@ -12,7 +10,7 @@ export default {
       type: new GraphQLNonNull(GraphQLString)
     }
   },
-  resolve: (root, { username }, context) => {
-    return db.User.findOne({ where: { username } });
+  resolve: (root, { username }, { sql }) => {
+    return sql.User.findOne({ where: { username } });
   }
 };

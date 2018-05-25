@@ -1,6 +1,5 @@
-import db from "../../../../db/models";
-import Command from "../../types/command";
 import { GraphQLList, GraphQLNonNull, GraphQLID } from "graphql";
+import Command from "../../types/command";
 
 export default {
   name: "Command",
@@ -11,5 +10,5 @@ export default {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: (root, { id }, context) => db.Command.findOne({ where: { id } })
+  resolve: (parent, { id }, { sql }) => sql.Command.findOne({ where: { id } })
 };

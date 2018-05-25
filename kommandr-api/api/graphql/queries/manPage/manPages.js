@@ -5,12 +5,11 @@ export default {
   name: "Man Page",
   description: "Man Pages",
   type: ManPageType,
-  resolve: (root, { id }, { dbMongo }) => {
-    const manPage = dbMongo.model("ManPage");
-    return manPage.findOne({ name: "mysqldump" }).then(
-      page => {
-        console.log(page);
-        return page;
+  resolve: (parent, { id }, { mongo }) => {
+    const manPage = mongo.model("ManPage");
+    return manPage.findOne({ name: "git-commit" }).then(
+      pages => {
+        return pages;
       },
       err => {
         console.log(err);

@@ -15,8 +15,6 @@ import Fork from "./command";
 import Program from "./program";
 import { CommandStatus } from "../enums";
 
-//import db from "../../../../db/models";
-
 const Command = new GraphQLObjectType({
   name: "Command",
   fields: () => ({

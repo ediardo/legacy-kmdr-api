@@ -1,14 +1,12 @@
-import db from "../../../../db/models";
-import Guide from "../../types/guide";
-
 import { GraphQLList } from "graphql";
+import Guide from "../../types/guide";
 
 export default {
   name: "Guides",
   description: "List of guides",
   type: new GraphQLList(Guide),
-  resolve: () =>
-    db.Guide.findAll({
-      include: [{ model: db.Command }]
+  resolve: (parent, args, { sql }) =>
+    sql.Guide.findAll({
+      include: [{ model: sql.Command }]
     })
 };

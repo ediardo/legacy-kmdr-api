@@ -1,7 +1,5 @@
-import db from "../../../../db/models";
-import Guide from "../../types/guide";
-
 import { GraphQLID, GraphQLNonNull } from "graphql";
+import Guide from "../../types/guide";
 
 export default {
   name: "Guide",
@@ -12,5 +10,5 @@ export default {
       type: new GraphQLNonNull(GraphQLID)
     }
   },
-  resolve: (root, { id }, ctx) => db.Guide.findOne({ where: { id } })
+  resolve: (parent, { id }, { sql }) => sql.Guide.findOne({ where: { id } })
 };

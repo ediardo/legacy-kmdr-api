@@ -1,14 +1,12 @@
-import db from "../../../../db/models";
-import Command from "../../types/command";
-
 import { GraphQLList } from "graphql";
+import Command from "../../types/command";
 
 export default {
   name: "Commands",
   description: "List of commands",
   type: new GraphQLList(Command),
-  resolve: () =>
-    db.Command.findAll({
-      include: [{ model: db.Program }]
+  resolve: (parent, args, { sql }) =>
+    sql.Command.findAll({
+      include: [{ model: sql.Program }]
     })
 };

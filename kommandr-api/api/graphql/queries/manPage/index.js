@@ -1,4 +1,4 @@
 import manPage from "./manPage";
-import manPages from "./manPageS";
+import manPages from "./manPages";
 
 export { manPage, manPages };

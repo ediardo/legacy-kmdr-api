@@ -1,4 +1,4 @@
-const commandSamples = require("../config/commands");
+const commandSamples = require("../seeds/commands")["commands"];
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

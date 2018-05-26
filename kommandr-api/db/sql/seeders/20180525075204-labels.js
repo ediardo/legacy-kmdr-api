@@ -1,13 +1,8 @@
-const programSamples = require("../seeds/programs")["programs"];
+const labelSamples = require("../seeds/labels")["labels"];
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const programs = programSamples.map(program => {
-      program.sourceId = 2;
-      program.createdAt = new Date();
-      return program;
-    });
-    return queryInterface.bulkInsert("Programs", programs, {});
+    return queryInterface.bulkInsert("Labels", labelSamples, {});
   },
 
   down: (queryInterface, Sequelize) => {

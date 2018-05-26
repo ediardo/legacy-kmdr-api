@@ -41,8 +41,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon kommandr-api/index.js --exec babel-node --presets es2015",
-    "docker-dev": "nodemon kommandr-api/index.js --exec babel-node --presets es2015 --legacy-watch ",
+    "start": "nodemon src/index.js --exec babel-node --presets es2015",
+    "docker-dev": "nodemon src/index.js --exec babel-node --presets es2015 --legacy-watch ",
     "migrate": "sequelize db:migrate",
     "seeds": "sequelize db:seed:all",
     "test": "jest"

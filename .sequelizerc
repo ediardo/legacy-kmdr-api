@@ -1,8 +1,8 @@
 const path = require('path');
 
 module.exports = {
-  'config': path.resolve('kommandr-api', 'db', 'sql', 'config', 'db.json'),
-  'models-path': path.resolve('kommandr-api', 'db', 'sql', 'models'),
-  'seeders-path': path.resolve('kommandr-api', 'db', 'sql', 'seeders'),
-  'migrations-path': path.resolve('kommandr-api', 'db', 'sql', 'migrations')
+  'config': path.resolve('src', 'db', 'sql', 'config', 'db.json'),
+  'models-path': path.resolve('src', 'db', 'sql', 'models'),
+  'seeders-path': path.resolve('src', 'db', 'sql', 'seeders'),
+  'migrations-path': path.resolve('src', 'db', 'sql', 'migrations')
 };

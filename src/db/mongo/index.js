@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import manpage from "./models/manpage";
 
-mongoose.connect("mongodb://kommandr-api_mongodb/explainshell").then(
+mongoose.connect("mongodb://api-mongodb/explainshell").then(
   () => {
     console.log("Connected to MongoDB");
   },

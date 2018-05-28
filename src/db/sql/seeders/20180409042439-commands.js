@@ -3,6 +3,7 @@ const commandSamples = require("../seeds/commands")["commands"];
 module.exports = {
   up: (queryInterface, Sequelize) => {
     const commands = commandSamples.map(command => {
+      command.userId = 2;
       command.sourceId = 2;
       command.status = 1;
       command.createdAt = new Date();

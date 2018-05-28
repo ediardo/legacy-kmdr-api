@@ -5,10 +5,10 @@ module.exports = {
       [
         {
           id: 1,
-          username: "test",
-          name: "Test User",
-          email: "test@test.com",
-          websiteUrl: "https://example.com/website",
+          username: "kommandr",
+          name: "kommandr",
+          email: "kmdr@kommandr.com",
+          websiteUrl: "https://kommandr.com",
           twitterHandle: "@kmdr_sh",
           status: 1,
           lastLogin: new Date(),
@@ -16,6 +16,18 @@ module.exports = {
           githubId: "1195596",
           githubHandle: "ediardo",
           avatarUrl: "https://avatars1.githubusercontent.com/u/9919?s=200&v=4",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          id: 2,
+          username: "tldr-pages",
+          name: "TLDR Pages",
+          email: "tldr@kommandr.com",
+          websiteUrl: "https://tldr.sh/",
+          twitterHandle: "",
+          status: 2,
+          lastLogin: new Date(),
           createdAt: new Date(),
           updatedAt: new Date()
         }

@@ -6,6 +6,7 @@ import UserStatus from "./userStatus";
 import EntityActions from "./entityActions";
 import EntityTypes from "./entityTypes";
 import AbuseReportStatus from "./abuseReportStatus";
+import PlatformName from "./platformName";
 
 export {
   AbuseReportStatus,
@@ -15,5 +16,6 @@ export {
   CommentStatus,
   GuideStatus,
   ProgramStatus,
-  UserStatus
+  UserStatus,
+  PlatformName
 };

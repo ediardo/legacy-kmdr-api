@@ -70,7 +70,7 @@ const Command = new GraphQLObjectType({
     },
     author: {
       type: User,
-      resolve: command => command.getUser()
+      resolve: command => command.User
     },
     createdAt: {
       type: GraphQLString,

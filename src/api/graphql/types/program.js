@@ -11,7 +11,7 @@ import {
 import Command from "./command";
 import Platform from "./platform";
 
-import { ProgramStatus } from "../enums";
+import { ProgramStatus, PlatformName } from "../enums";
 import { ManPage } from ".";
 
 const Program = new GraphQLObjectType({
@@ -38,6 +38,10 @@ const Program = new GraphQLObjectType({
     status: {
       type: new GraphQLEnumType(ProgramStatus)
     },
+    platformName: {
+      type: new GraphQLEnumType(PlatformName),
+      resolve: program => program.platformId
+    },
     manPage: {
       type: ManPage,
       resolve: (program, args, { mongo }) => {
@@ -51,10 +55,6 @@ const Program = new GraphQLObjectType({
           }
         );
       }
-    },
-    platform: {
-      type: Platform,
-      resolve: command => command.Platform
     },
     commands: {
       type: new GraphQLList(Command),

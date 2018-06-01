@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID } from "graphql";
+import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLString } from "graphql";
 import Command from "../../types/command";
 
 export default {
@@ -6,9 +6,20 @@ export default {
   description: "Get command by ID",
   type: Command,
   args: {
-    id: {
-      type: new GraphQLNonNull(GraphQLID)
+    username: {
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    slugTitle: {
+      type: new GraphQLNonNull(GraphQLString)
     }
   },
-  resolve: (parent, { id }, { sql }) => sql.Command.findOne({ where: { id } })
+  resolve: (parent, { username, slugTitle }, { sql }) => {
+    return sql.Command.findOne({
+      include: [
+        { model: sql.User, where: { username } },
+        { model: sql.Program }
+      ],
+      where: { slugTitle }
+    });
+  }
 };

@@ -1,4 +1,3 @@
-var Hashids = require("hashids");
 var slugify = require("slugify");
 module.exports = function(sequelize, DataTypes) {
   var Command = sequelize.define(

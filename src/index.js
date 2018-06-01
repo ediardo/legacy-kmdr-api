@@ -7,17 +7,11 @@ import cors from "cors";
 import graphqlSchema from "./api/graphql/";
 import sql from "./db/sql/models";
 import mongo from "./db/mongo";
-import session from "express-session";
+import config from "./config/config";
+import axios from "axios";
+
 const app = express();
 app.use(cookieParser());
-// GET secret from untracked file
-app.use(
-  session({
-    secret: "keyboard cat pacifico",
-    resave: false,
-    saveUninitialized: true
-  })
-);
 var corsOptions = {
   origin: [
     "http://localhost:5000",
@@ -27,7 +21,9 @@ var corsOptions = {
   credentials: true
 };
 app.use(cors(corsOptions));
-
+const recommendr = axios.create({
+  baseURL: config["development"]["recommendr"].baseURL
+});
 app.use(
   "/graphql",
   bodyParser.json(),
@@ -37,7 +33,8 @@ app.use(
     context: {
       req,
       mongo,
-      sql
+      sql,
+      recommendr
     }
   }))
 );

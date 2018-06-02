@@ -34,6 +34,10 @@ const Command = new GraphQLObjectType({
       type: GraphQLString,
       description: "Title of the command"
     },
+    slugTitle: {
+      type: GraphQLString,
+      description: "The slugify title"
+    },
     rawContent: {
       type: GraphQLString,
       description: "Raw content of the Command"

@@ -37,6 +37,9 @@ module.exports = {
           type: DataTypes.STRING,
           allowNull: false
         },
+        slugTitle: {
+          type: DataTypes.STRING
+        },
         rawContent: {
           type: DataTypes.STRING(500),
           allowNull: false

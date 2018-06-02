@@ -1,5 +1,5 @@
 var Hashids = require("hashids");
-
+var slugify = require("slugify");
 module.exports = function(sequelize, DataTypes) {
   var Command = sequelize.define(
     "Command",
@@ -19,6 +19,9 @@ module.exports = function(sequelize, DataTypes) {
           notEmpty: true,
           min: 1
         }
+      },
+      slugTitle: {
+        type: DataTypes.STRING
       },
       rawContent: {
         type: DataTypes.STRING(500),
@@ -95,14 +98,31 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
   };
-  /*
-  Command.beforeCreate((kommandr, options) => {
-    return Command.max("id").then(max => {
-      var hashId = new Hashids("kommandr", 6);
-      return (kommandr.hashId = hashId.encode(max + 1));
-    });
-  });
 
+  /*
+  Command.hook("beforeBulkCreate", (command, options) => {
+    console.log("asdasdas");
+    command.slugTitle = slugify(command.title);
+    return command;
+  });
+  Command.hook("beforeUpdate", (command, options) => {
+    console.log("qqqqqqqqqqq");
+    command.slugTitle = slugify(command.title);
+    return command;
+  });
+  Command.hook("beforeSave", (command, options) => {
+    console.log("xxxxxxx");
+    command.slugTitle = slugify(command.title);
+    return command;
+  });
+  
+  Command.beforeBulkCreate((command, options) => {
+    console.log("asdasdas");
+    command.slugTitle = slugify(command.title);
+    return command;
+  });
+  */
+  /*
   Command.afterCreate((kommandr, options) => {
     const { id, userId } = kommandr;
     // Anon user is always 0, do not log activity

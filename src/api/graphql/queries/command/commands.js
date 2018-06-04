@@ -1,5 +1,6 @@
 import { GraphQLList, GraphQLSchema, GraphQLString } from "graphql";
 import Command from "../../types/command";
+import { literal } from "sequelize";
 
 export default {
   name: "Commands",
@@ -14,13 +15,24 @@ export default {
     var where = {};
     if (query) {
       where["$or"] = [
-        { title: { $like: `%${query}%` } },
-        { rawContent: { $like: `${query}%` } }
+        { "$Program.cliName$": query.trim() },
+        literal(
+          `MATCH (title) AGAINST ('${query.trim()}' IN NATURAL LANGUAGE  MODE)`
+        )
       ];
     }
     return sql.Command.findAll({
       include: [{ model: sql.Program }, { model: sql.User }],
-      where
+      where,
+      order: [
+        [
+          literal(
+            `MATCH (title) AGAINST ('${query.trim()}' IN NATURAL LANGUAGE MODE) DESC`
+          )
+        ],
+        ["totalViews", "DESC"]
+      ],
+      limit: 100
     });
   }
 };

@@ -13,7 +13,21 @@ export default {
   args: {
     name: {
       type: GraphQLString
+    },
+    platformName: {
+      type: GraphQLString
     }
   },
-  resolve: (root, { name }, { sql }) => sql.Program.findOne({ where: { name } })
+  resolve: (root, { name, platformName }, { sql }) =>
+    sql.Program.findOne({
+      include: [
+        {
+          model: sql.Platform,
+          where: {
+            name: platformName
+          }
+        }
+      ],
+      where: { name }
+    })
 };

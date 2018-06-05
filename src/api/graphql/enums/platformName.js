@@ -1,7 +1,7 @@
 export default {
   name: "PlatformNameEnum",
   values: {
-    common: {
+    multiplatform: {
       value: 1
     },
     linux: {

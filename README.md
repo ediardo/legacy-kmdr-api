@@ -14,7 +14,7 @@ $ git clone git@github.com:kommandr/kommandr-api.git
 ### Install dependencies
 ```shell
 $ cd kommandr-api
-$ npm install --save
+$ npm install
 ```
 
 ## Running kommandr.com locally
@@ -31,13 +31,13 @@ $ docker-compose build
 #### Start containers
 Start the three services that run the API (GraphQL), MySQL and MongoDB servers.
 ```shell
-$ docker-compose up
+$ docker-compose -p backend up
 ```
 
 #### Run database migrations and seeds
 Run the script below to run the database migrations and create the initial database state on MySQL and MongoDB
 ```shell
-$ ./scripts/creatDatabases.sh
+$ ./scripts/createDatabases.sh
 ```
 
 ### View GraphiQL (Optional)

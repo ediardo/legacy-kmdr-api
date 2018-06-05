@@ -20,6 +20,11 @@ export default {
         { model: sql.Program }
       ],
       where: { slugTitle }
+    }).then(command => {
+      command.increment("totalViews", {
+        silent: true
+      });
+      return command;
     });
   }
 };

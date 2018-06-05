@@ -1,5 +1,5 @@
 import { me, user, users } from "./user";
-import { program, programs } from "./program";
+import { program, programs, similarPrograms } from "./program";
 import { guide, guides } from "./guide";
 import { command, commands } from "./command";
 import { platform, platforms } from "./platform";
@@ -18,5 +18,6 @@ export default {
   commands,
   activities,
   manPages,
-  manPage
+  manPage,
+  similarPrograms
 };

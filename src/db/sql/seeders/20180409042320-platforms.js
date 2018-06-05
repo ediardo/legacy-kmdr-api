@@ -3,7 +3,7 @@ module.exports = {
     return queryInterface.bulkInsert("Platforms", [
       {
         id: 1,
-        name: "Common"
+        name: "Multiplatform"
       },
       {
         id: 2,

@@ -9,7 +9,7 @@ export default {
     sql.Program.findAll({
       include: [
         {
-          model: db.Platform
+          model: sql.Platform
         }
       ]
     })

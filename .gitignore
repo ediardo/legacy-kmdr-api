@@ -1,5 +1,8 @@
 config/config.json
 db.development.sqlite
 node_modules
-misc/explainshell
-misc/manPages
+dumps/explainshell.tar.gz
+*.bak
+src/db/sql/config/db.json
+src/db/sql/config/config.json
+src/config/config.json

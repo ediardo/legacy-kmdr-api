@@ -1,0 +1,24 @@
+{
+  "development": {
+    "recommendr": {
+      "baseURL": "http://api-recommendr:7070/"
+    },
+    "sql": {
+      "host": "api-mariadb"
+    },
+    "mongodb": {
+      "host": "api-mariadb"
+    }
+  }
+  "production: {
+    "recommendr": {
+      "baseURL": "http://api-recommendr:7070/"
+    },
+    "sql": {
+      "host": "api-mariadb"
+    },
+    "mongodb": {
+      "host": "api-mariadb"
+    }
+  }
+}

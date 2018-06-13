@@ -1,18 +1,18 @@
 #!/bin/bash
 echo "Working on MariaDB instance"
-docker exec kommandr-api ./node_modules/.bin/sequelize db:migrate
-docker exec kommandr-api ./node_modules/.bin/sequelize db:seed:all
+docker exec kommandr-api sequelize db:migrate
+docker exec kommandr-api sequelize db:seed:all
 echo ""
 
 echo "Working on MongoDB instance"
 if [ ! -f $(pwd)/dumps/explainshell.tar.gz ]; then
   curl -o $(pwd)/dumps/explainshell.tar.gz https://s3.amazonaws.com/kommandr.com/explainshell.tar.gz
 fi
-docker run -d --name mongorestore --network kommandr_backend mongo
+docker run -d --name mongorestore1 --network kommandr_backend mongo
 echo "Copying database backup into container..."
-docker cp $(pwd)/dumps/explainshell.tar.gz mongorestore:/tmp
+docker cp $(pwd)/dumps/explainshell.tar.gz mongorestore1:/tmp
 echo "Decompressing database backup file..."
-docker exec -it mongorestore bash -c "tar xvzf /tmp/explainshell.tar.gz -C /tmp"
+docker exec -it mongorestore1 bash -c "tar xvzf /tmp/explainshell.tar.gz -C /tmp"
 echo "Restoring backup into kommandr-api_mongodb container..."
-docker exec -it mongorestore bash -c "mongorestore -d explainshell --host kommandr-api-mongodb /tmp/explainshell"
-docker rm -f mongorestore
+docker exec -it mongorestore1 bash -c "mongorestore -d explainshell --host kommandr-api-mongodb /tmp/explainshell"
+docker rm -f mongorestore1

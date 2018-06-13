@@ -5,4 +5,4 @@ dumps/explainshell.tar.gz
 *.bak
 src/db/sql/config/db.json
 src/db/sql/config/config.json
-src/config/config.json
+src/config/*.json

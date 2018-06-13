@@ -1,14 +1,14 @@
 #!/bin/bash
 echo "Working on MariaDB instance"
-docker exec api-node ./node_modules/.bin/sequelize db:migrate
-docker exec api-node ./node_modules/.bin/sequelize db:seed:all
+docker exec kommandr-api-graphql ./node_modules/.bin/sequelize db:migrate
+docker exec kommandr-api-graphql ./node_modules/.bin/sequelize db:seed:all
 echo ""
 
 echo "Working on MongoDB instance"
 if [ ! -f $(pwd)/dumps/explainshell.tar.gz ]; then
   curl -o $(pwd)/dumps/explainshell.tar.gz https://s3.amazonaws.com/kommandr.com/explainshell.tar.gz
 fi
-docker run -d --name mongorestore --network backend_default mongo
+docker run -d --name mongorestore --network kommandr_backend mongo
 echo "Copying database backup into container..."
 docker cp $(pwd)/dumps/explainshell.tar.gz mongorestore:/tmp
 echo "Decompressing database backup file..."

@@ -6,3 +6,4 @@ dumps/explainshell.tar.gz
 src/db/sql/config/db.json
 src/db/sql/config/config.json
 src/config/*.json
+*.swp

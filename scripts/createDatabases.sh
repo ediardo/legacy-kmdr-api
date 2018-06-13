@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Working on MariaDB instance"
-docker exec kommandr-api-graphql ./node_modules/.bin/sequelize db:migrate
-docker exec kommandr-api-graphql ./node_modules/.bin/sequelize db:seed:all
+docker exec kommandr-api ./node_modules/.bin/sequelize db:migrate
+docker exec kommandr-api ./node_modules/.bin/sequelize db:seed:all
 echo ""
 
 echo "Working on MongoDB instance"

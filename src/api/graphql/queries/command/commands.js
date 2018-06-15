@@ -9,29 +9,45 @@ export default {
   args: {
     query: {
       type: GraphQLString
+    },
+    name: {
+      type: GraphQLString
     }
   },
-  resolve: (parent, { query }, { sql }) => {
-    var where = {};
+  resolve: (parent, { query, name }, { sql }) => {
+    var opts = {
+      where: {},
+      order: [],
+      include: [{ model: sql.Program }, { model: sql.User }]
+    };
     if (query) {
-      where["$or"] = [
+      opts.where["$or"] = [
         { "$Program.cliName$": query.trim() },
         literal(
           `MATCH (title) AGAINST ('${query.trim()}' IN NATURAL LANGUAGE  MODE)`
         )
       ];
-    }
-    return sql.Command.findAll({
-      include: [{ model: sql.Program }, { model: sql.User }],
-      where,
-      order: [
+      opts.order = [
         [
           literal(
             `MATCH (title) AGAINST ('${query.trim()}' IN NATURAL LANGUAGE MODE) DESC`
           )
         ],
         ["totalViews", "DESC"]
-      ],
+      ];
+      opts.include = [{ model: sql.Program }, { model: sql.User }];
+    } else {
+      if (name) {
+        opts.include = [
+          { model: sql.Program, where: { name } },
+          { model: sql.User }
+        ];
+      }
+    }
+    return sql.Command.findAll({
+      include: opts.include,
+      where: opts.where,
+      order: opts.order,
       limit: 100
     });
   }

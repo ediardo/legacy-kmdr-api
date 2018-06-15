@@ -9,6 +9,7 @@ import sql from "./db/sql/models";
 import mongo from "./db/mongo";
 import config from "./config/config";
 import axios from "axios";
+const ENVIRONMENT = process.env.NODE_ENV;
 
 const app = express();
 app.use(cookieParser());
@@ -22,8 +23,9 @@ var corsOptions = {
 };
 app.use(cors(corsOptions));
 const recommendr = axios.create({
-  baseURL: config["development"]["recommendr"].baseURL
+  baseURL: config[ENVIRONMENT]["recommendr"].baseURL
 });
+
 app.use(
   "/graphql",
   bodyParser.json(),

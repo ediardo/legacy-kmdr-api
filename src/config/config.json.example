@@ -1,7 +1,7 @@
 {
   "development": {
     "recommendr": {
-      "baseURL": "http://kommandr-recommendr:7070/"
+      "baseURL": "http://127.0.0.1:7070/"
     }
   }
 }

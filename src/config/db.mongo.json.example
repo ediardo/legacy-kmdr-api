@@ -1,10 +1,9 @@
 {
   "development": {
-    "host": "kommandr-api-mariadb",
-    "dialect": "mysql",
+    "host": "localhost",
     "username": "kommandr",
     "password": "k0mm4ndr",
-    "database": "kommandr",
-    "port": 3306
+    "database": "explainshell",
+    "port": 27017
   }
 }

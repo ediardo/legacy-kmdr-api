@@ -1,6 +1,6 @@
 {
   "development": {
-    "host": "kommandr-api-mariadb",
+    "host": "localhost",
     "dialect": "mysql",
     "username": "kommandr",
     "password": "k0mm4ndr",

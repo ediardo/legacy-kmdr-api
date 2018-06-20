@@ -17,7 +17,7 @@ export default {
   resolve: (parent, { query, name }, { sql }) => {
     var opts = {
       where: {},
-      order: [],
+      order: [["totalViews", "DESC"]],
       include: [{ model: sql.Program }, { model: sql.User }]
     };
     if (query) {

@@ -9,7 +9,7 @@ import sql from "./db/sql/models";
 import mongo from "./db/mongo";
 import config from "./config/config";
 import axios from "axios";
-const ENVIRONMENT = process.env.NODE_ENV;
+const ENVIRONMENT = process.env.NODE_ENV || "development";
 
 const app = express();
 app.use(cookieParser());

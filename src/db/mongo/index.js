@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import manpage from "./models/manpage";
 import config from "../../config/db.mongo";
 
-const ENVIRONMENT = process.env.NODE_ENV;
+const ENVIRONMENT = process.env.NODE_ENV || "development";
 
 mongoose
   .connect(

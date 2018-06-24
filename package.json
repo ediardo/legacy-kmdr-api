@@ -45,7 +45,7 @@
   },
   "scripts": {
     "babel-node": "babel-node --presets=latest",
-    "start": "NODE_ENV=development nodemon --exec npm run babel-node -- ./src/index.js ",
+    "start": "nodemon --exec npm run babel-node -- ./src/index.js ",
     "migrate": "sequelize db:migrate",
     "seeds": "sequelize db:seed:all",
     "test": "jest"

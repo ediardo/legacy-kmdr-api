@@ -41,6 +41,9 @@ module.exports = {
           slugTitle: {
             type: DataTypes.STRING
           },
+          queryStr: {
+            type: DataTypes.STRING(500)
+          },
           rawContent: {
             type: DataTypes.STRING(500),
             allowNull: false
@@ -95,7 +98,7 @@ module.exports = {
       )
       .then(() =>
         sequelize.addIndex("Commands", {
-          fields: ["title"],
+          fields: ["queryStr"],
           type: "FULLTEXT"
         })
       );

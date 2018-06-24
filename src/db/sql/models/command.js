@@ -22,6 +22,9 @@ module.exports = function(sequelize, DataTypes) {
       slugTitle: {
         type: DataTypes.STRING
       },
+      queryStr: {
+        type: DataTypes.STRING
+      },
       rawContent: {
         type: DataTypes.STRING(500),
         validate: {

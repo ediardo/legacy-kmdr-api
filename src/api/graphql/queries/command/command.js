@@ -21,7 +21,6 @@ export default {
       ],
       where: { slugTitle }
     }).then(command => {
-      console.log(command);
       if (command) {
         command.increment("totalViews", {
           silent: true

@@ -1,10 +1,8 @@
-"use strict";
-
 var fs = require("fs");
 var path = require("path");
 var Sequelize = require("sequelize");
 var basename = path.basename(module.filename);
-var env = process.env.NODE_ENV || "development";
+const env = process.env.NODE_ENV || "development";
 var config = require("../../../config/db.sql.json")[env];
 var db = {};
 
@@ -16,18 +14,18 @@ if (config.use_env_variable) {
     config.username,
     config.password,
     {
-      host: config.host,
+      host: process.env.KMDR_API_SQL_HOST || config.host,
       dialect: config.dialect,
-      port: config.port,
+      port: process.env.KMDR_API_SQL_PORT || config.port,
       dialectOptions: {
         charset: "utf8mb4"
-      }
+      },
+      logging: config.logging
     }
   );
 }
 
-fs
-  .readdirSync(__dirname)
+fs.readdirSync(__dirname)
   .filter(function(file) {
     return (
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"

@@ -1,6 +1,14 @@
 {
   "development": {
-    "host": "localhost",
+    "host": "192.168.99.100",
+    "dialect": "mysql",
+    "username": "kommandr",
+    "password": "k0mm4ndr",
+    "database": "kommandr",
+    "port": 3306
+  },
+  "production": {
+    "host": "192.168.99.100",
     "dialect": "mysql",
     "username": "kommandr",
     "password": "k0mm4ndr",

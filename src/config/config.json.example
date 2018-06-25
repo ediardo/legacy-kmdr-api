@@ -3,5 +3,10 @@
     "recommendr": {
       "baseURL": "http://127.0.0.1:7070/"
     }
+  },
+  "production": {
+    "recommendr": {
+      "baseURL": "http://kommandr-recommendr:7070/"
+    }
   }
 }

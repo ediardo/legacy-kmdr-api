@@ -57,8 +57,7 @@ const Program = new GraphQLObjectType({
       }
     },
     commands: {
-      type: new GraphQLList(Command),
-      resolve: program => program.getCommands()
+      type: new GraphQLList(Command)
     },
     createdAt: {
       type: GraphQLString,

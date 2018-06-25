@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLString } from "graphql";
+import { GraphQLNonNull, GraphQLString } from "graphql";
 import Command from "../../types/command";
 
 export default {
@@ -21,9 +21,11 @@ export default {
       ],
       where: { slugTitle }
     }).then(command => {
-      command.increment("totalViews", {
-        silent: true
-      });
+      if (command) {
+        command.increment("totalViews", {
+          silent: true
+        });
+      }
       return command;
     });
   }

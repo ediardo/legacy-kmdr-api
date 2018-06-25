@@ -1,0 +1,16 @@
+{
+  "development": {
+    "host": "localhost",
+    "username": "kommandr",
+    "password": "k0mm4ndr",
+    "database": "explainshell",
+    "port": 27017
+  },
+  "production": {
+    "host": "kommandr-api-mongodb",
+    "username": "kommandr",
+    "password": "k0mm4ndr",
+    "database": "explainshell",
+    "port": 27017
+  }
+}

@@ -26,6 +26,9 @@ export default {
           where: {
             name: platformName
           }
+        },
+        {
+          model: sql.Command
         }
       ],
       where: { name }

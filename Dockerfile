@@ -1,12 +1,13 @@
 FROM node:8
+RUN apt-get update && apt-get install -y
 USER node
-RUN mkdir /home/node/.npm-global
-RUN mkdir /home/node/app
-WORKDIR /home/node/app
+RUN mkdir /home/node/api
+WORKDIR /home/node/api
+COPY ./ ./
 ENV PATH=/home/node/.npm-global/bin:$PATH
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-ENV NODE_ENV=development
-RUN npm i npm@latest -g
-COPY package*.json ./
-RUN npm -g --silent i 
-RUN npm cache clean --force
+RUN npm install npm@latest -g
+RUN npm install
+USER node
+RUN mkdir /home/node/api/logs
+EXPOSE 5001

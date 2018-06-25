@@ -1,2 +1,3 @@
-node_modules
-dumps
+node_modules/
+dumps/
+logs/

@@ -1,24 +1,12 @@
 {
   "development": {
     "recommendr": {
-      "baseURL": "http://api-recommendr:7070/"
-    },
-    "sql": {
-      "host": "api-mariadb"
-    },
-    "mongodb": {
-      "host": "api-mariadb"
+      "baseURL": "http://127.0.0.1:7070/"
     }
-  }
-  "production: {
+  },
+  "production": {
     "recommendr": {
-      "baseURL": "http://api-recommendr:7070/"
-    },
-    "sql": {
-      "host": "api-mariadb"
-    },
-    "mongodb": {
-      "host": "api-mariadb"
+      "baseURL": "http://kommandr-recommendr:7070/"
     }
   }
 }

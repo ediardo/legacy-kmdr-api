@@ -17,6 +17,7 @@
     "jest": "^18.1.0",
     "lodash": "^4.17.10",
     "mongoose": "^5.1.2",
+    "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "qs": "^6.5.2",
     "sequelize": "^3.33.0",
@@ -46,6 +47,7 @@
   "scripts": {
     "babel-node": "babel-node --presets=latest",
     "start": "nodemon --exec npm run babel-node -- ./src/index.js ",
+    "build": "babel-node --presets=latest ./src/index.js",
     "migrate": "sequelize db:migrate",
     "seeds": "sequelize db:seed:all",
     "test": "jest"

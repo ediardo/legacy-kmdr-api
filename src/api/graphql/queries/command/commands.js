@@ -17,19 +17,22 @@ export default {
     },
     platforms: {
       type: new GraphQLList(GraphQLString)
+    },
+    sortBy: {
+      type: GraphQLString
     }
   },
-  resolve: (parent, { title, programs, platforms }, { sql }) => {
+  resolve: (parent, { title, programs, platforms, sortBy }, { sql }) => {
     var opts = {
       where: { $and: [] },
-      order: [["totalViews", "DESC"]],
+      order: [],
       include: [{ model: sql.Program }, { model: sql.User }]
     };
     if (title !== undefined && title !== "") {
       opts.where = {
         $and: [
           literal(
-            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE)`
+            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)`
           )
         ]
       };
@@ -37,7 +40,7 @@ export default {
         ...opts.order,
         [
           literal(
-            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE) DESC`
+            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION) DESC`
           )
         ]
       ];
@@ -54,6 +57,18 @@ export default {
         ...opts.where.$and,
         { "$Program.platformId$": { $in: platforms } }
       ];
+    }
+    switch (sortBy) {
+      case "most_popular":
+        opts.order = [...opts.order, ["totalViews", "DESC"]];
+        break;
+      case "newest":
+        opts.order = [...opts.order, ["createdAt", "DESC"]];
+        break;
+      case "oldest":
+        opts.order = [...opts.order, ["createdAt", "ASC"]];
+      default:
+        opts.order = [...opts.order, ["title", "DESC"]];
     }
     return sql.Command.findAll({
       include: opts.include,

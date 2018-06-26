@@ -32,7 +32,7 @@ export default {
       opts.where = {
         $and: [
           literal(
-            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)`
+            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE)`
           )
         ]
       };
@@ -40,7 +40,7 @@ export default {
         ...opts.order,
         [
           literal(
-            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION) DESC`
+            `MATCH (queryStr) AGAINST ('${title.trim()}' IN NATURAL LANGUAGE MODE) DESC`
           )
         ]
       ];
@@ -68,7 +68,7 @@ export default {
       case "oldest":
         opts.order = [...opts.order, ["createdAt", "ASC"]];
       default:
-        opts.order = [...opts.order, ["title", "DESC"]];
+        opts.order = [...opts.order, ["title", "ASC"]];
     }
     return sql.Command.findAll({
       include: opts.include,

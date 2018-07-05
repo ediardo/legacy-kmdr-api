@@ -32,5 +32,12 @@ export default {
         }
       ],
       where: { name }
+    }).then(program => {
+      if (program) {
+        program.increment("totalViews", {
+          silent: true
+        });
+      }
+      return program;
     })
 };

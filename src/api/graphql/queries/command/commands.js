@@ -53,6 +53,9 @@ export default {
     }
     if (platforms !== undefined && platforms.length > 0) {
       platforms = platforms.map(p => allPlatforms.indexOf(p) + 1);
+      if (platforms.includes(2) || platforms.includes(3)) {
+        platforms = [...platforms, 1];
+      }
       opts.where.$and = [
         ...opts.where.$and,
         { "$Program.platformId$": { $in: platforms } }

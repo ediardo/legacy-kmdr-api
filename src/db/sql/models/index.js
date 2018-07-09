@@ -20,7 +20,7 @@ if (config.use_env_variable) {
       dialectOptions: {
         charset: "utf8mb4"
       },
-      logging: config.logging
+      logging: config.logging || console.log
     }
   );
 }

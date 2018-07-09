@@ -11,6 +11,8 @@ import config from "./config/config";
 import axios from "axios";
 import morgan from "morgan";
 import fs from "fs";
+import session from "express-session";
+
 const ENVIRONMENT = process.env.NODE_ENV || "development";
 
 const app = express();
@@ -19,6 +21,7 @@ var corsOptions = {
   origin: [
     "http://localhost:5000",
     "http://kommandr.com",
+    "http://www.kommandr.com",
     "https://kommandr.com"
   ],
   credentials: true
@@ -46,6 +49,17 @@ app.use(cors(corsOptions));
 const recommendr = axios.create({
   baseURL: config[ENVIRONMENT]["recommendr"].baseURL
 });
+
+var sess = {
+  secret: "belmar taco"
+};
+
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1);
+  sess.cookie.secure = false;
+}
+
+app.use(session(sess));
 
 app.use(
   "/graphql",

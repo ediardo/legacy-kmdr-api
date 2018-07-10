@@ -54,11 +54,6 @@ var sess = {
   secret: "belmar taco"
 };
 
-if (app.get("env") === "production") {
-  app.set("trust proxy", 1);
-  sess.cookie.secure = false;
-}
-
 app.use(session(sess));
 
 app.use(

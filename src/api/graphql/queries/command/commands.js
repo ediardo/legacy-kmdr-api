@@ -30,7 +30,6 @@ export default {
     { title, programs, platforms, sortBy, rawQuery },
     { req, sql }
   ) => {
-    let searchTerms = "";
     var opts = {
       where: { $and: [] },
       order: [],
@@ -52,20 +51,15 @@ export default {
           )
         ]
       ];
-      searchTerms = `title:${title}`;
     }
     if (programs !== undefined && programs.length > 0) {
-      programs.forEach(p => (searchTerms += ` program:${p}`));
       opts.where.$and = [
         ...opts.where.$and,
         { "$Program.cliName$": { $in: programs } }
       ];
     }
     if (platforms !== undefined && platforms.length > 0) {
-      platforms = platforms.map(p => {
-        searchTerms += ` platform:${p}`;
-        return allPlatforms.indexOf(p) + 1;
-      });
+      platforms = platforms.map(p => allPlatforms.indexOf(p) + 1);
       if (platforms.includes(2) || platforms.includes(3)) {
         platforms = [...platforms, 1];
       }

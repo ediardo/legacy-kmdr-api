@@ -1,44 +1,81 @@
-![Logo](/logo.png)
-
-# kommandr-api
+# Kommandr API service
 
 The API backend service for kommandr.com.
 
-## Installation
+## Prerequites
+- A MongoDB instance
+- A MariaDB server
 
+## Installation
 ### Clone the project
-```shell
-$ git clone git@github.com:kommandr/kommandr-api.git
+```
+$ git clone git@github.com:kommandr/api.git
  ```
  
 ### Install dependencies
-```shell
-$ cd kommandr-api
+```
+$ cd api
 $ npm install
 ```
 
-## Running kommandr.com locally
-
-```shell
-$ cd kommandr-api
+### Configure database connections
+Create the configuration files for the database and edit as appropiate
 ```
-#### Build images
-Build docker images specified in docker-compose.yml
-```shell
-$ docker-compose build
+$ cd config/
+$ cp config.json.example config.json
+$ cp db.mongo.json.example db.mongo.json
+$ cp db.sql.json.example db.sql.json
 ```
 
-#### Start containers
-Start the three services that run the API (GraphQL), MySQL and MongoDB servers.
-```shell
-$ docker-compose -p backend up
+### Restore databases
+**Important: the databases.sh assumes you are running two docker containers with the databases servers running on them. See docker-compose.dev.yml inside of the kommandr repo for more details**
+
+#### Restoring the SQL Database
+```
+$ ./databases.sh restore --sql
+Working on MariaDB instance
+Searching for kommandr-latest.sql file in dumps/...
+Copying backup into container...
+Restoring backup into kommandr-api-sql container...
+Successful restore...
+```
+#### Restoring the MongoDB Database
+```
+$ ./databases.sh restore --mongo
+```
+**You can learn more about the usage of databases.sh by using the `--help` option**
+```
+$ ./databases.sh --help
+Usage: databases.sh COMMAND OPTIONS
+
+An utility script that performs database restore and backup operations
+against servers running in Docker containers.
+
+This script assumes backup files are inside of the dumps/ directory
+
+Options:
+  --help,-h   prints this message
+Commands:
+  restore     restores the databases
+  backup      backup the databases
+
 ```
 
-#### Run database migrations and seeds
-Run the script below to run the database migrations and create the initial database state on MySQL and MongoDB
-```shell
-$ ./scripts/createDatabases.sh
+## Development
+
+### Start the development server
 ```
+$ npm start
+```
+
+The development server will restart just after you modified a file
+
 
 ### View GraphiQL (Optional)
 Go to http://localhost:5001/graphql
+
+## Production
+Pending...
+
+## Troubleshooting
+Pending...

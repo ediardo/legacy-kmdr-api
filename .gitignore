@@ -2,6 +2,7 @@ config/config.json
 db.development.sqlite
 node_modules
 dumps/explainshell.tar.gz
+dumps/*
 *.bak
 src/db/sql/config/db.json
 src/db/sql/config/config.json

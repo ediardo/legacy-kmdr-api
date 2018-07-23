@@ -80,10 +80,12 @@ export default {
       default:
         opts.order = [...opts.order, ["title", "ASC"]];
     }
-
+    // This is not optimal since every call to this GraphQL query
+    // would create a new entry, some queries aren't triggered by
+    // user's interaction with the input box
     sql.SearchTerm.create({
       query: rawQuery,
-      sessionId: req.sessionID
+      sessionId: req.session.id
     });
     return sql.Command.findAll({
       include: opts.include,
